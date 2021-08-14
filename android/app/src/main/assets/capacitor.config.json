@@ -1,0 +1,6 @@
+{
+	"appId": "de.adnannassar.app",
+	"appName": "Algebra3D",
+	"webDir": "dist/Algebra3D",
+	"bundledWebRuntime": false
+}

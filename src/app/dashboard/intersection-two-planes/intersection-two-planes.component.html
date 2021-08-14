@@ -1,0 +1,48 @@
+<div class="content-wrapper">
+  <div class="content-overflow">
+    <div class="container">
+      <div class="row " data-aos="fade-up">
+        <div class="col-xl-12 grid-margin">
+          <div class="bg-white main-img-radius-top main-img-radius-bottom">
+            <div class="card-body">
+              <div class="d-flex border-bottom pb-4 justify-content-center">
+                <div class="content" [innerHTML]="planeForm1">...</div>
+              </div>
+
+              <div class="d-flex border-bottom py-4  justify-content-center">
+                <div class="content" [innerHTML]="planeForm2">...</div>
+              </div>
+
+
+              <div class="d-flex border-bottom py-4 justify-content-between flex-wrap">
+                <button onclick="fillTestValuesInPlanes(1);">Füllen mit Testwerten</button>
+                <button onclick="fillTestValuesInPlanes(2);">Füllen mit Testwerten</button>
+                <button onclick="drawPlane(1);">Ebene 1 zeichnen</button>
+                <button onclick="drawPlane(2);">Ebene 2 zeichnen</button>
+                <button onclick="findIntersection()">Schnittmenge</button>
+                <button onclick="reset();">Reset</button>
+              </div>
+
+
+              <div class="d-flex py-4 align-items-center justify-content-center">
+                <div id="ggb-element"></div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

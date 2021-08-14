@@ -1,0 +1,84 @@
+
+
+.content-overflow {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 10px 0;
+
+}
+
+.content-wrapper .banner-content {
+  position: absolute;
+  padding: 40px 60px;
+  left: 0px;
+  bottom: 0px;
+
+}
+
+.stretch-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: stretch;
+}
+
+.stretch-card .card {
+  width: 100%;
+}
+
+
+/*MY DEFINITIONS*/
+.myMargin {
+  margin-bottom: 5rem;
+}
+
+#change_theme_header {
+  visibility: hidden;
+}
+
+#change_theme_header {
+  visibility: visible;
+}
+
+
+.grid-margin {
+  margin-bottom: 5rem;
+}
+
+
+.rotate-img {
+  overflow: hidden;
+}
+
+.rotate-img img {
+  transition: transform .5s ease;
+}
+
+.rotate-img:hover img {
+  transform: scale(2.5);
+}
+
+#theme {
+  line-height: 0;
+  font-size: 1.5rem;
+}
+
+.main-img-radius-top {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.main-img-radius-bottom {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+
+
+
+
+
