@@ -1,18 +1,8 @@
-::ng-deep button {
-  border-radius: 0.3rem;
-  padding: 0.5rem;
-  background-color: rgba(36, 109, 125, 0.646);
-  font-size: 0.8rem;
-  margin: 0.2rem;
-
-  &:hover {
-    color: white;
-    cursor: pointer;
-  }
-}
 
 ::ng-deep .vector-input {
   max-width: 3rem;
+  max-height: 2rem;
+  font-size: 0.8rem;
   text-align: center;
   border: 1px solid lightgray;
   border-radius: 0.2rem;
@@ -20,11 +10,9 @@
 }
 
 
-.content-overflow{
-  min-width: 100%;
-}
 
 
+/*Media Queries*/
 @media only screen and (max-device-width: 767px) {
   ::ng-deep .math {
     font-size: 1rem;
@@ -33,12 +21,14 @@
     max-width: 2rem;
   }
 }
+
 @media only screen and (max-device-width: 523px) {
 
   ::ng-deep .vector-input {
     max-width: 1.7rem;
   }
 }
+
 @media only screen and (max-device-width: 491px) {
 
   ::ng-deep .math {
@@ -47,24 +37,27 @@
   ::ng-deep .vector-input {
     max-width: 1.5rem;
   }
-
 }
+
 @media only screen and (max-device-width: 454px) {
 
   ::ng-deep .math {
     font-size: 0.8rem;
   }
 }
+
 @media only screen and (max-device-width: 414px) {
   ::ng-deep .vector-input {
     max-width: 1.3rem;
   }
 }
+
 @media only screen and (max-device-width: 409px) {
   ::ng-deep .vector-input {
     max-width: 1.1rem;
   }
 }
+
 @media only screen and (max-device-width: 398px) {
   ::ng-deep .math {
     font-size: 0.75rem;
@@ -73,12 +66,14 @@
     max-width: 1.1rem;
   }
 }
+
 @media only screen and (max-device-width: 376px) {
 
   ::ng-deep .vector-input {
     max-width: 1rem;
   }
 }
+
 @media only screen and (max-device-width: 369px) {
   ::ng-deep .math {
     font-size: 0.7rem;
@@ -87,6 +82,7 @@
     max-width: 1rem;
   }
 }
+
 @media only screen and (max-device-width: 351px) {
   ::ng-deep .math {
     font-size: 0.65rem;
@@ -95,6 +91,7 @@
     max-width: 1rem;
   }
 }
+
 @media only screen and (max-device-width: 331px) {
   ::ng-deep .math {
     font-size: 0.6rem;
@@ -103,6 +100,7 @@
     max-width: 1rem;
   }
 }
+
 @media only screen and (max-device-width: 313px) {
   ::ng-deep .math {
     font-size: 0.6rem;
