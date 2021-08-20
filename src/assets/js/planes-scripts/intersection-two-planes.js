@@ -19,8 +19,45 @@ window.addEventListener("load", function () {
   ggbApp.inject("ggb-element");
 });
 
+class Point {
+  x;
+  y;
+  z;
 
-var Base_Vec_a, Base_Vec_b, Base_Vec_c, Dircetion_Vec1_a, Dircetion_Vec1_b, Dircetion_Vec1_c, Dircetion_Vec2_a,
+  constructor(x = 0, y = 0, z = 0) {
+    this.x = x;
+    this.y = y;
+    this.z = z;
+  }
+}
+
+class Straight {
+  startPoint;
+  endPoint;
+
+  constructor(startPoint = new Point(), endPoint = new Point()) {
+    this.startPoint = startPoint;
+    this.endPoint = endPoint;
+  }
+}
+
+class Plane {
+  point1;
+  point2;
+  point3;
+
+  constructor(point1 = new Point(), point2 = new Point(), point3 = new Point()) {
+    this.point1 = point1;
+    this.point2 = point2;
+    this.point3 = point3;
+  }
+
+}
+
+
+let point1, point2, point3, straight1, straight2, plane1, plane2;
+
+let Base_Vec_a, Base_Vec_b, Base_Vec_c, Direction_Vec1_a, Dircetion_Vec1_b, Dircetion_Vec1_c, Dircetion_Vec2_a,
   Dircetion_Vec2_b, Dircetion_Vec2_c;
 
 function reset() {
@@ -28,18 +65,33 @@ function reset() {
   document.ggbApplet.reset();
 }
 
-function getValues(planeNumber) {
-  Base_Vec_a = document.getElementById(`E${planeNumber}-base-vector-01`).value;
-  Base_Vec_b = document.getElementById(`E${planeNumber}-base-vector-02`).value;
-  Base_Vec_c = document.getElementById(`E${planeNumber}-base-vector-03`).value;
 
-  Dircetion_Vec1_a = document.getElementById(`E${planeNumber}-direction-vector-01-a`).value;
+function getValuesFromPoint(pointNumber) {
+  let x = document.getElementById(`point${pointNumber}-x`).value;
+  let y = document.getElementById(`point${pointNumber}-y`).value;
+  let z = document.getElementById(`point${pointNumber}-z`).value;
+
+  point1 = new Point(x, y, z);
+}
+
+function getValuesFromPlane(planeNumber) {
+  let x1 = document.getElementById(`E${planeNumber}-base-vector-01`).value;
+  let y1 = document.getElementById(`E${planeNumber}-base-vector-02`).value;
+  let y2 = document.getElementById(`E${planeNumber}-base-vector-03`).value;
+
+  point1 = getValuesFromPoint(1);
+  point2 = getValuesFromPoint(2);
+  point3 = getValuesFromPoint(3);
+
+  Direction_Vec1_a = document.getElementById(`E${planeNumber}-direction-vector-01-a`).value;
   Dircetion_Vec1_b = document.getElementById(`E${planeNumber}-direction-vector-01-b`).value;
   Dircetion_Vec1_c = document.getElementById(`E${planeNumber}-direction-vector-01-c`).value;
 
   Dircetion_Vec2_a = document.getElementById(`E${planeNumber}-direction-vector-02-a`).value;
   Dircetion_Vec2_b = document.getElementById(`E${planeNumber}-direction-vector-02-b`).value;
   Dircetion_Vec2_c = document.getElementById(`E${planeNumber}-direction-vector-02-c`).value;
+
+  plane1 = new Plane(point1, point2, point3);
 }
 
 function fillTestValuesInPlanes(planeNumber) {
@@ -72,7 +124,7 @@ function fillTestValuesInPlanes(planeNumber) {
 }
 
 function drawPlane(planeNumber) {
-  getValues(planeNumber);
+  getValuesFromPlane(planeNumber);
   if (okayToDrawPlanes()) {
 
     ggbApplet.evalCommand('S = (0,0,0)');
@@ -80,7 +132,7 @@ function drawPlane(planeNumber) {
     ggbApplet.evalCommand(`baseVector_E${planeNumber} = Vector(S,A_${planeNumber})`);
     ggbApplet.setFixed(`A_${planeNumber}`, false, false);
 
-    ggbApplet.evalCommand(`B_${planeNumber} = (${Dircetion_Vec1_a} , ${Dircetion_Vec1_b} ,${Dircetion_Vec1_c})`);
+    ggbApplet.evalCommand(`B_${planeNumber} = (${Direction_Vec1_a} , ${Dircetion_Vec1_b} ,${Dircetion_Vec1_c})`);
     ggbApplet.evalCommand(`directionVector1_E${planeNumber} = Vector(A_${planeNumber} ,B_${planeNumber})`);
     ggbApplet.setFixed(`B_${planeNumber}`, false, false);
 
@@ -146,7 +198,7 @@ function clearInputs() {
 }
 
 function okayToDrawPlanes() {
-  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Dircetion_Vec1_a && Dircetion_Vec1_b && Dircetion_Vec1_c && Dircetion_Vec2_a &&
+  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Direction_Vec1_a && Dircetion_Vec1_b && Dircetion_Vec1_c && Dircetion_Vec2_a &&
     Dircetion_Vec2_b && Dircetion_Vec2_c;
 }
 
