@@ -44,7 +44,7 @@ export class IntersectionTwoPlanesComponent implements OnInit {
   }
 
   async loadApplet() {
-    this.scriptService.load('geogebra-applet').then(data => {
+    this.scriptService.load('geogebra-applet-intersection-two-planes').then(data => {
       console.log('geogebra-applet loaded ', data);
     }).catch(error => console.log(error));
   }
@@ -71,11 +71,10 @@ export class IntersectionTwoPlanesComponent implements OnInit {
   }
 
   loadIntersectionForm() {
-    fetch('/assets/math-templates/intersection-of-two-planes/intersection-line-two-planes.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/intersection-of-two-planes/line-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.intersectionForm = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
-
 
 }

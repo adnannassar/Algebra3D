@@ -17,11 +17,17 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  moveToIntersetionOfPlanes() {
+  moveToIntersectionOfPlanes() {
     this.router.navigate(['intersection-planes'])
       .then(() => {
         window.location.reload();
       });
   }
 
+  moveToIntersectionOfPlaneAndLine() {
+    this.router.navigate(['intersection-plane-and-line'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

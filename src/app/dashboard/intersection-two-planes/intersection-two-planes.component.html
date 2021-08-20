@@ -12,15 +12,15 @@
                 <div class="content" [innerHTML]="planeForm2">...</div>
               </div>
               <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
-                <button class="btn btn-outline-primary m-2 flex-grow-1" onclick="fillTestValuesInPlanes(1);">E1 Mit
-                  Random Werte fühlen
+                <button id="fillE1Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="fillTestValuesInPlanes(1);">E1 mit
+                  Random Werte füllen
                 </button>
-                <button class="btn btn-outline-primary m-2 flex-grow-1" onclick="fillTestValuesInPlanes(2);">E2 Mit
-                  Random Werte fühlen
+                <button id="fillE2Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="fillTestValuesInPlanes(2);">E2 mit
+                  Random Werte füllen
                 </button>
-                <button class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(1);">E1 zeichnen</button>
-                <button class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(2);">E2 zeichnen</button>
-                <button class="btn btn-outline-success m-2 flex-grow-1" onclick="findIntersection()">Schnittmenge
+                <button id="drawE1Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(1);">E1 zeichnen</button>
+                <button id="drawE2Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(2);">E2 zeichnen</button>
+                <button id="intersectionBtn" class="btn btn-outline-success m-2 flex-grow-1" onclick="findIntersection()">Schnittmenge
                 </button>
                 <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
               </div>

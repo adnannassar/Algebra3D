@@ -73,7 +73,7 @@ function fillTestValuesInPlanes(planeNumber) {
 
 function drawPlane(planeNumber) {
   getValues(planeNumber);
-  if (okayToDoMath()) {
+  if (okayToDrawPlanes()) {
 
     ggbApplet.evalCommand('S = (0,0,0)');
     ggbApplet.evalCommand(`A_${planeNumber} = (${Base_Vec_a} , ${Base_Vec_b} ,${Base_Vec_c})`);
@@ -96,7 +96,7 @@ function drawPlane(planeNumber) {
 }
 
 function findIntersection() {
-  if (okayToDoMath()) {
+  if (okayToDrawFindIntersection()) {
     ggbApplet.evalCommand(`F = Intersect(E_${1},E_${2})`);
 
     let intersectionFormString = ggbApplet.getValueString("F");
@@ -117,7 +117,7 @@ function findIntersection() {
 
 
   } else {
-    window.alert("Bitte zu erst alle Werte eingeben")
+    window.alert("Bitte zu erst E1, E1 zeichnen lassen")
   }
 }
 
@@ -134,23 +134,40 @@ function clearInputs() {
     document.getElementById(`E${i}-direction-vector-02-a`).value = '';
     document.getElementById(`E${i}-direction-vector-02-b`).value = '';
     document.getElementById(`E${i}-direction-vector-02-c`).value = '';
-
-    document.getElementById(`G-base-vector-01`).value = '';
-    document.getElementById(`G-base-vector-02`).value = '';
-    document.getElementById(`G-base-vector-03`).value = '';
-
-    document.getElementById(`G-direction-vector-01`).value = '';
-    document.getElementById(`G-direction-vector-02`).value = '';
-    document.getElementById(`G-direction-vector-03`).value = '';
-
-
   }
+  document.getElementById(`G-base-vector-01`).value = '';
+  document.getElementById(`G-base-vector-02`).value = '';
+  document.getElementById(`G-base-vector-03`).value = '';
+
+  document.getElementById(`G-direction-vector-01`).value = '';
+  document.getElementById(`G-direction-vector-02`).value = '';
+  document.getElementById(`G-direction-vector-03`).value = '';
 
 }
 
-function okayToDoMath() {
+function okayToDrawPlanes() {
   return Base_Vec_a && Base_Vec_b && Base_Vec_c && Dircetion_Vec1_a && Dircetion_Vec1_b && Dircetion_Vec1_c && Dircetion_Vec2_a &&
     Dircetion_Vec2_b && Dircetion_Vec2_c;
+}
+
+function okayToDrawFindIntersection() {
+  return ggbApplet.getVisible('E_1') && ggbApplet.getVisible('E_2');
+}
+
+function disableButtons() {
+  document.getElementById("fillE1Btn").disabled = true;
+  document.getElementById("fillE2Btn").disabled = true;
+  document.getElementById("drawE1Btn").disabled = true;
+  document.getElementById("drawE2Btn").disabled = true;
+  document.getElementById("intersectionBtn").disabled = true;
+}
+
+function enableButtons() {
+  document.getElementById("fillE1Btn").disabled = false;
+  document.getElementById("fillE2Btn").disabled = false;
+  document.getElementById("drawE1Btn").disabled = false;
+  document.getElementById("drawE2Btn").disabled = false;
+  document.getElementById("intersectionBtn").disabled = false;
 }
 
 function getCoordinate(baseString, coordinateLetter) {
