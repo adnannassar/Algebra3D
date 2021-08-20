@@ -1,4 +1,3 @@
-// Geogebra Applet Declaration
 var ggbApp = new GGBApplet({
   "appName": '3d',
   "showMenuBar": false,
@@ -19,10 +18,11 @@ window.addEventListener("load", function () {
   ggbApp.inject("ggb-element");
 });
 
-
-let Base_Vec_a, Base_Vec_b, Base_Vec_c, Direction_Vec1_b_Vec1_a, Direction_Vec1_b, Direction_Vec1_b_Vec1_c,
-  Direction_Vec1_b_Vec2_a,
-  Direction_Vec1_b_Vec2_b, Direction_Vec1_b_Vec2_c, Base_Vec_G_a, Base_Vec_G_b, Base_Vec_G_c, Direction_Vec1_G_a,
+let
+  Base_Vec_a, Base_Vec_b, Base_Vec_c,
+  Direction_Vec1_a, Direction_Vec1_b, Direction_Vec1_c,
+  Direction_Vec2_a, Direction_Vec2_b, Direction_Vec2_c,
+  Base_Vec_G_a, Base_Vec_G_b, Base_Vec_G_c, Direction_Vec1_G_a,
   Direction_Vec1_G_b, Direction_Vec1_G_c;
 
 function reset() {
@@ -35,13 +35,13 @@ function getPlaneValues() {
   Base_Vec_b = document.getElementById(`E-base-vector-02`).value;
   Base_Vec_c = document.getElementById(`E-base-vector-03`).value;
 
-  Direction_Vec1_b_Vec1_a = document.getElementById(`E-direction-vector-01-a`).value;
+  Direction_Vec1_a = document.getElementById(`E-direction-vector-01-a`).value;
   Direction_Vec1_b = document.getElementById(`E-direction-vector-01-b`).value;
-  Direction_Vec1_b_Vec1_c = document.getElementById(`E-direction-vector-01-c`).value;
+  Direction_Vec1_c = document.getElementById(`E-direction-vector-01-c`).value;
 
-  Direction_Vec1_b_Vec2_a = document.getElementById(`E-direction-vector-02-a`).value;
-  Direction_Vec1_b_Vec2_b = document.getElementById(`E-direction-vector-02-b`).value;
-  Direction_Vec1_b_Vec2_c = document.getElementById(`E-direction-vector-02-c`).value;
+  Direction_Vec2_a = document.getElementById(`E-direction-vector-02-a`).value;
+  Direction_Vec2_b = document.getElementById(`E-direction-vector-02-b`).value;
+  Direction_Vec2_c = document.getElementById(`E-direction-vector-02-c`).value;
 }
 
 function getLineValues() {
@@ -105,11 +105,11 @@ function drawPlane() {
     ggbApplet.evalCommand(`baseVectorE = Vector(S,A)`);
     ggbApplet.setFixed(`A`, false, false);
 
-    ggbApplet.evalCommand(`B= (${Direction_Vec1_b_Vec1_a} , ${Direction_Vec1_b} ,${Direction_Vec1_b_Vec1_c})`);
+    ggbApplet.evalCommand(`B= (${Direction_Vec1_a} , ${Direction_Vec1_b} ,${Direction_Vec1_c})`);
     ggbApplet.evalCommand(`directionVector1E = Vector(A,B)`);
     ggbApplet.setFixed(`B`, false, false);
 
-    ggbApplet.evalCommand(`C= (${Direction_Vec1_b_Vec2_a} , ${Direction_Vec1_b_Vec2_b} ,${Direction_Vec1_b_Vec2_c})`);
+    ggbApplet.evalCommand(`C= (${Direction_Vec2_a} , ${Direction_Vec2_b} ,${Direction_Vec2_c})`);
     ggbApplet.evalCommand(`directionVector2E = Vector(A,C)`);
     ggbApplet.setFixed(`C`, false, false);
 
@@ -123,6 +123,7 @@ function drawPlane() {
 function findIntersection() {
   if (okayToDrawFindIntersection()) {
     ggbApplet.evalCommand(`Schnittpunkt = Intersect(E,G)`);
+    ggbApplet.setColor('Schnittpunkt', 255, 0, 0);
 
     let intersectionPointString = ggbApplet.getValueString("Schnittpunkt");
 
@@ -173,8 +174,8 @@ function clearInputs() {
 }
 
 function okayToDrawPlane() {
-  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Direction_Vec1_b_Vec1_a && Direction_Vec1_b && Direction_Vec1_b_Vec1_c && Direction_Vec1_b_Vec2_a &&
-    Direction_Vec1_b_Vec2_b && Direction_Vec1_b_Vec2_c;
+  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Direction_Vec1_a && Direction_Vec1_b && Direction_Vec1_c && Direction_Vec2_a &&
+    Direction_Vec2_b && Direction_Vec2_c;
 }
 
 function okayToDrawLine() {
