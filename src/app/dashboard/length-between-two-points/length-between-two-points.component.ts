@@ -12,7 +12,7 @@ export class LengthBetweenTwoPointsComponent implements OnInit {
 
   pointForm1: SafeHtml = '';
   pointForm2: SafeHtml = '';
-  intersectionForm: SafeHtml = '';
+
 
   constructor(private _renderer2: Renderer2,
               @Inject(DOCUMENT) private _document: Document,
@@ -38,7 +38,7 @@ export class LengthBetweenTwoPointsComponent implements OnInit {
   }
 
   async loadApplet() {
-    this.scriptService.load('geogebra-applet-line-between-tow-points').then(data => {
+    this.scriptService.load('geogebra-applet-length-between-tow-points').then(data => {
       console.log('geogebra-applet loaded ', data);
     }).catch(error => console.log(error));
   }
@@ -46,28 +46,23 @@ export class LengthBetweenTwoPointsComponent implements OnInit {
   async loadHtml() {
     this.loadPoint1Form();
     this.loadPoint2Form();
-    this.loadResultForm();
+
   }
 
 
   loadPoint1Form() {
-    fetch('/assets/math-templates/line-between-two-points/point1-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/length-between-two-points/point1-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.pointForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 
   loadPoint2Form() {
-    fetch('/assets/math-templates/line-between-two-points/point2-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/length-between-two-points/point2-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.pointForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 
-  loadResultForm() {
-    fetch('/assets/math-templates/line-between-two-points/line-input-form.html').then(res => res.text()).then(data => {
-      console.log('HTML loaded');
-      this.intersectionForm = this.sanitizer.bypassSecurityTrustHtml(data);
-    });
-  }
+
 }
