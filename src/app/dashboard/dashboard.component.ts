@@ -36,4 +36,10 @@ export class DashboardComponent implements OnInit {
         window.location.reload();
       });
   }
+  navigateToLengthBetweenTwoPoints() {
+    this.router.navigate(['length-between-two-points'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

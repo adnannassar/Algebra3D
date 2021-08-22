@@ -9,6 +9,7 @@ import {DashboardComponent} from './dashboard/dashboard.component';
 import {IntersectionTwoPlanesComponent} from './dashboard/intersection-two-planes/intersection-two-planes.component';
 import {IntersectionPlaneAndLineComponent} from './dashboard/intersection-plane-and-line/intersection-plane-and-line.component';
 import { LineBetweenTwoPointsComponent } from './dashboard/line-between-two-points/line-between-two-points.component';
+import { LengthBetweenTwoPointsComponent } from './dashboard/length-between-two-points/length-between-two-points.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LineBetweenTwoPointsComponent } from './dashboard/line-between-two-poin
     DashboardComponent,
     IntersectionTwoPlanesComponent,
     IntersectionPlaneAndLineComponent,
-    LineBetweenTwoPointsComponent
+    LineBetweenTwoPointsComponent,
+    LengthBetweenTwoPointsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

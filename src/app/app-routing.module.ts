@@ -5,6 +5,7 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {IntersectionTwoPlanesComponent} from "./dashboard/intersection-two-planes/intersection-two-planes.component";
 import {IntersectionPlaneAndLineComponent} from "./dashboard/intersection-plane-and-line/intersection-plane-and-line.component";
 import {LineBetweenTwoPointsComponent} from "./dashboard/line-between-two-points/line-between-two-points.component";
+import {LengthBetweenTwoPointsComponent} from "./dashboard/length-between-two-points/length-between-two-points.component";
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'intersection-planes', component: IntersectionTwoPlanesComponent},
   {path: 'intersection-plane-and-line' , component: IntersectionPlaneAndLineComponent},
-  {path: 'line-between-two-points' , component: LineBetweenTwoPointsComponent}
+  {path: 'line-between-two-points' , component: LineBetweenTwoPointsComponent},
+  {path: 'length-between-two-points' , component: LengthBetweenTwoPointsComponent}
 ];
 
 
