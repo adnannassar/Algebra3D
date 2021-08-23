@@ -6,6 +6,7 @@ import {IntersectionTwoPlanesComponent} from "./dashboard/intersection-two-plane
 import {IntersectionPlaneAndLineComponent} from "./dashboard/intersection-plane-and-line/intersection-plane-and-line.component";
 import {LineBetweenTwoPointsComponent} from "./dashboard/line-between-two-points/line-between-two-points.component";
 import {LengthBetweenTwoPointsComponent} from "./dashboard/length-between-two-points/length-between-two-points.component";
+import {ParallelLineComponent} from "./dashboard/parallel-line/parallel-line.component";
 
 
 const routes: Routes = [
@@ -14,7 +15,9 @@ const routes: Routes = [
   {path: 'intersection-planes', component: IntersectionTwoPlanesComponent},
   {path: 'intersection-plane-and-line' , component: IntersectionPlaneAndLineComponent},
   {path: 'line-between-two-points' , component: LineBetweenTwoPointsComponent},
-  {path: 'length-between-two-points' , component: LengthBetweenTwoPointsComponent}
+  {path: 'length-between-two-points' , component: LengthBetweenTwoPointsComponent},
+  {path: 'parallel-line' , component: ParallelLineComponent}
+
 ];
 
 

@@ -42,4 +42,10 @@ export class DashboardComponent implements OnInit {
         window.location.reload();
       });
   }
+  navigateToParallelLine() {
+    this.router.navigate(['parallel-line'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

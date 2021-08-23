@@ -38,7 +38,7 @@ export class LengthBetweenTwoPointsComponent implements OnInit {
   }
 
   async loadApplet() {
-    this.scriptService.load('geogebra-applet-length-between-tow-points').then(data => {
+    this.scriptService.load('geogebra-applet-length-between-two-points').then(data => {
       console.log('geogebra-applet loaded ', data);
     }).catch(error => console.log(error));
   }
