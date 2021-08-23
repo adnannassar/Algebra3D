@@ -39,7 +39,7 @@ function calculateLength() {
     ggbApplet.evalCommand(`S= Segment(P_1,P_2)`);
     ggbApplet.setFixed(`S`, false, false);
     ggbApplet.evalCommand('Text(" ["+Name(P_1)+ " " +Name(P_2)+" = "+S+"]", (Midpoint(P_1,P_2)), false)');
-    ggbApplet.setColor('text1', 230, 20, 20)
+    ggbApplet.setColor('text1', 128, 0, 128);
     let lineBetweenTwoPoints = ggbApplet.getValueString("S");
     document.getElementById(`length-between-points`).innerHTML = lineBetweenTwoPoints.substr(3, lineBetweenTwoPoints.length);
 
