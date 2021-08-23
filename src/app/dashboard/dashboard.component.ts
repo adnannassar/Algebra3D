@@ -48,4 +48,10 @@ export class DashboardComponent implements OnInit {
         window.location.reload();
       });
   }
+  navigateToIntersectionOfTwoLine() {
+    this.router.navigate(['intersection-of-two-lines'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }
