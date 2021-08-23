@@ -11,21 +11,19 @@
               </div>
               <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
                 <button id="fillEBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInPlane();">P1 mit
+                        onclick="fillTestValuesInPoint(1);">P1 mit
                   Random Werte füllen
                 </button>
                 <button id="fillGBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInLine();">G mit
+                        onclick="fillTestValuesInPoint(2);">P2 mit
                   Random Werte füllen
                 </button>
-                <button id="drawEBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane();">E
-                  zeichnen
+                <button id="drawP1Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPoint(1);">P1 zeichnen
                 </button>
-                <button id="drawGBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawLine();">G
-                  zeichnen
+                <button id="draw21Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPoint(2);">P2 zeichnen
                 </button>
                 <button id="intersectionBtn" class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="findIntersection()">Schnittpunkt
+                        onclick="drawLine()">Gerade zeichnen
                 </button>
                 <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
               </div>

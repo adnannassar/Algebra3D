@@ -46,30 +46,30 @@ function getValuesFromPlane(planeNumber) {
 
 function fillTestValuesInPlanes(planeNumber) {
   if (planeNumber === 1) {
-    document.getElementById(`E${planeNumber}-base-vector-01`).value = 1;
-    document.getElementById(`E${planeNumber}-base-vector-02`).value = 0;
-    document.getElementById(`E${planeNumber}-base-vector-03`).value = 1;
+    document.getElementById(`E${planeNumber}-base-vector-01`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-base-vector-02`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-base-vector-03`).value = randomInRange(1, 5);
 
-    document.getElementById(`E${planeNumber}-direction-vector-01-a`).value = 2;
-    document.getElementById(`E${planeNumber}-direction-vector-01-b`).value = 0;
-    document.getElementById(`E${planeNumber}-direction-vector-01-c`).value = 0;
+    document.getElementById(`E${planeNumber}-direction-vector-01-a`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-01-b`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-01-c`).value = randomInRange(1, 5);
 
-    document.getElementById(`E${planeNumber}-direction-vector-02-a`).value = 0;
-    document.getElementById(`E${planeNumber}-direction-vector-02-b`).value = -1;
-    document.getElementById(`E${planeNumber}-direction-vector-02-c`).value = 0;
+    document.getElementById(`E${planeNumber}-direction-vector-02-a`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-02-b`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-02-c`).value = randomInRange(1, 5);
   }
   if (planeNumber === 2) {
-    document.getElementById(`E${planeNumber}-base-vector-01`).value = 0;
-    document.getElementById(`E${planeNumber}-base-vector-02`).value = 1;
-    document.getElementById(`E${planeNumber}-base-vector-03`).value = 2;
+    document.getElementById(`E${planeNumber}-base-vector-01`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-base-vector-02`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-base-vector-03`).value = randomInRange(1, 5);
 
-    document.getElementById(`E${planeNumber}-direction-vector-01-a`).value = 0;
-    document.getElementById(`E${planeNumber}-direction-vector-01-b`).value = 0;
-    document.getElementById(`E${planeNumber}-direction-vector-01-c`).value = 4;
+    document.getElementById(`E${planeNumber}-direction-vector-01-a`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-01-b`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-01-c`).value = randomInRange(1, 5);
 
-    document.getElementById(`E${planeNumber}-direction-vector-02-a`).value = 1;
-    document.getElementById(`E${planeNumber}-direction-vector-02-b`).value = 0;
-    document.getElementById(`E${planeNumber}-direction-vector-02-c`).value = 0;
+    document.getElementById(`E${planeNumber}-direction-vector-02-a`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-02-b`).value = randomInRange(1, 5);
+    document.getElementById(`E${planeNumber}-direction-vector-02-c`).value = randomInRange(1, 5);
   }
 }
 
@@ -187,6 +187,10 @@ function getCoordinate(baseString, coordinateLetter) {
         return '0'
     }
   }
+}
+
+function randomInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 

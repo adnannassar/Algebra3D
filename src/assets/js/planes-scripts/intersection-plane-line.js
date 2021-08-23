@@ -56,27 +56,27 @@ function getLineValues() {
 }
 
 function fillTestValuesInPlane() {
-  document.getElementById(`E-base-vector-01`).value = 2.39;
-  document.getElementById(`E-base-vector-02`).value = -3.2;
-  document.getElementById(`E-base-vector-03`).value = 4;
+  document.getElementById(`E-base-vector-01`).value = randomInRange(1, 5);
+  document.getElementById(`E-base-vector-02`).value = randomInRange(1, 5);
+  document.getElementById(`E-base-vector-03`).value = randomInRange(1, 5);
 
-  document.getElementById(`E-direction-vector-01-a`).value = 5.94;
-  document.getElementById(`E-direction-vector-01-b`).value = -4.35;
-  document.getElementById(`E-direction-vector-01-c`).value = 4;
+  document.getElementById(`E-direction-vector-01-a`).value = randomInRange(1, 5);
+  document.getElementById(`E-direction-vector-01-b`).value = randomInRange(1, 5);
+  document.getElementById(`E-direction-vector-01-c`).value = randomInRange(1, 5);
 
-  document.getElementById(`E-direction-vector-02-a`).value = -2.63;
-  document.getElementById(`E-direction-vector-02-b`).value = -8.22;
-  document.getElementById(`E-direction-vector-02-c`).value = 3;
+  document.getElementById(`E-direction-vector-02-a`).value = randomInRange(1, 5);
+  document.getElementById(`E-direction-vector-02-b`).value = randomInRange(1, 5);
+  document.getElementById(`E-direction-vector-02-c`).value = randomInRange(1, 5);
 }
 
 function fillTestValuesInLine() {
-  document.getElementById(`G-base-vector-01`).value = 0;
-  document.getElementById(`G-base-vector-02`).value = 4;
-  document.getElementById(`G-base-vector-03`).value = 0;
+  document.getElementById(`G-base-vector-01`).value = randomInRange(1, 5);
+  document.getElementById(`G-base-vector-02`).value = randomInRange(1, 5);
+  document.getElementById(`G-base-vector-03`).value = randomInRange(1, 5);
 
-  document.getElementById(`G-direction-vector-01`).value = -3.38;
-  document.getElementById(`G-direction-vector-02`).value = 0.35;
-  document.getElementById(`G-direction-vector-03`).value = 7;
+  document.getElementById(`G-direction-vector-01`).value = randomInRange(1, 5);
+  document.getElementById(`G-direction-vector-02`).value = randomInRange(1, 5);
+  document.getElementById(`G-direction-vector-03`).value = randomInRange(1, 5);
 }
 
 function drawLine() {
@@ -218,6 +218,10 @@ function getCoordinate(baseString, coordinateLetter) {
         return '0'
     }
   }
+}
+
+function randomInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 

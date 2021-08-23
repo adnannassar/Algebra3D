@@ -37,7 +37,7 @@ export class LineBetweenTwoPointsComponent implements OnInit {
   }
 
   async loadApplet() {
-    this.scriptService.load('geogebra-applet-line-between-tow-points').then(data => {
+    this.scriptService.load('geogebra-applet-line-between-two-points').then(data => {
       console.log('geogebra-applet loaded ', data);
     }).catch(error => console.log(error));
   }
@@ -64,7 +64,7 @@ export class LineBetweenTwoPointsComponent implements OnInit {
   }
 
   loadResultForm() {
-    fetch('/assets/math-templates/line-between-two-points/line-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/line-between-two-points/line-output-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.intersectionForm = this.sanitizer.bypassSecurityTrustHtml(data);
     });
