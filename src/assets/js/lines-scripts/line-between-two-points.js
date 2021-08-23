@@ -26,6 +26,9 @@ function drawPoint(pointId) {
   if (okayToDrawPoint(pointId)) {
     ggbApplet.evalCommand(`P_${pointId}= (${P1_x} , ${P1_y} ,${P1_z})`);
     ggbApplet.setFixed(`P_${pointId}`, false, false);
+
+    ggbApplet.registerUpdateListener("updateLine");
+
   } else {
     window.alert(`Bitte zu erst alle Werte des Punktes ${pointId} eingeben`);
   }
@@ -33,7 +36,6 @@ function drawPoint(pointId) {
 
 function drawLine() {
   if (okayToDrawLine()) {
-    console.log('hi');
     ggbApplet.evalCommand(`G= Line(P_1,P_2)`);
     ggbApplet.setFixed(`G`, false, false);
 
@@ -57,6 +59,13 @@ function drawLine() {
     window.alert("Bitte zu erst die Punkten P1, P2 zeichnen lassen")
   }
 
+}
+
+function updateLine(obj) {
+
+  if (ggbApplet.getObjectType(obj) == "point") {
+    drawLine();
+  }
 }
 
 function clearInputs() {
@@ -88,7 +97,6 @@ function okayToDrawPoint(pointId) {
 function okayToDrawLine() {
   return ggbApplet.getVisible('P_1') && ggbApplet.getVisible('P_2');
 }
-
 
 function disableButtons() {
   document.getElementById("fillEBtn").disabled = true;
@@ -169,4 +177,6 @@ function init() {
   ggbApp = initGgApplet(false);
   registerGbApplet();
 }
+
+
 

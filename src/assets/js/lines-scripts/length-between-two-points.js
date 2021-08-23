@@ -1,190 +1,81 @@
-var ggbApp = new GGBApplet({
-  "appName": '3d',
-  "showMenuBar": false,
-  "showToolBar": false,
-  "enableLabelDrags": false,
-  "enableRightClick": false,
-  "errorDialogsActive": false,
-  "useBrowserForJS": true,
-  "enableUndoRedo": false,
-  "material_id": 'zu9afzy8',
-  "scaleContainerClass": "d-flex",
-  "autoHeight": true,
-  "borderColor": "rgba(106,104,104,0.24)",
-}, true);
+let ggbApp;
+init(false);
 
 
-window.addEventListener("load", function () {
-  ggbApp.inject("ggb-element");
-});
-
-let
-  Base_Vec_a, Base_Vec_b, Base_Vec_c,
-  Direction_Vec1_a, Direction_Vec1_b, Direction_Vec1_c,
-  Direction_Vec2_a, Direction_Vec2_b, Direction_Vec2_c,
-  Base_Vec_G_a, Base_Vec_G_b, Base_Vec_G_c, Direction_Vec1_G_a,
-  Direction_Vec1_G_b, Direction_Vec1_G_c;
+let P1_x, P1_y, P1_z;
 
 function reset() {
   clearInputs();
   document.ggbApplet.reset();
 }
 
-function getPlaneValues() {
-  Base_Vec_a = document.getElementById(`E-base-vector-01`).value;
-  Base_Vec_b = document.getElementById(`E-base-vector-02`).value;
-  Base_Vec_c = document.getElementById(`E-base-vector-03`).value;
-
-  Direction_Vec1_a = document.getElementById(`E-direction-vector-01-a`).value;
-  Direction_Vec1_b = document.getElementById(`E-direction-vector-01-b`).value;
-  Direction_Vec1_c = document.getElementById(`E-direction-vector-01-c`).value;
-
-  Direction_Vec2_a = document.getElementById(`E-direction-vector-02-a`).value;
-  Direction_Vec2_b = document.getElementById(`E-direction-vector-02-b`).value;
-  Direction_Vec2_c = document.getElementById(`E-direction-vector-02-c`).value;
+function getPointValues(pointId) {
+  P1_x = document.getElementById(`P${pointId}-x`).value;
+  P1_y = document.getElementById(`P${pointId}-y`).value;
+  P1_z = document.getElementById(`P${pointId}-z`).value;
 }
 
-function getLineValues() {
-  Base_Vec_G_a = document.getElementById(`G-base-vector-01`).value;
-  Base_Vec_G_b = document.getElementById(`G-base-vector-02`).value;
-  Base_Vec_G_c = document.getElementById(`G-base-vector-03`).value;
-
-  Direction_Vec1_G_a = document.getElementById(`G-direction-vector-01`).value;
-  Direction_Vec1_G_b = document.getElementById(`G-direction-vector-02`).value;
-  Direction_Vec1_G_c = document.getElementById(`G-direction-vector-03`).value;
-
+function fillTestValuesInPoint(pointId) {
+  document.getElementById(`P${pointId}-x`).value = randomInRange(1, 5)
+  document.getElementById(`P${pointId}-y`).value = randomInRange(1, 5)
+  document.getElementById(`P${pointId}-z`).value = randomInRange(1, 5)
 }
 
-function fillTestValuesInPlane() {
-  document.getElementById(`E-base-vector-01`).value = 2.39;
-  document.getElementById(`E-base-vector-02`).value = -3.2;
-  document.getElementById(`E-base-vector-03`).value = 4;
+function drawPoint(pointId) {
+  getPointValues(pointId);
+  if (okayToDrawPoint(pointId)) {
+    ggbApplet.evalCommand(`P_${pointId}= (${P1_x} , ${P1_y} ,${P1_z})`);
+    ggbApplet.setFixed(`P_${pointId}`, false, false);
 
-  document.getElementById(`E-direction-vector-01-a`).value = 5.94;
-  document.getElementById(`E-direction-vector-01-b`).value = -4.35;
-  document.getElementById(`E-direction-vector-01-c`).value = 4;
+    ggbApplet.registerUpdateListener("updateLine");
 
-  document.getElementById(`E-direction-vector-02-a`).value = -2.63;
-  document.getElementById(`E-direction-vector-02-b`).value = -8.22;
-  document.getElementById(`E-direction-vector-02-c`).value = 3;
+  } else {
+    window.alert(`Bitte zu erst alle Werte des Punktes ${pointId} eingeben`);
+  }
 }
 
-function fillTestValuesInLine() {
-  document.getElementById(`G-base-vector-01`).value = 0;
-  document.getElementById(`G-base-vector-02`).value = 4;
-  document.getElementById(`G-base-vector-03`).value = 0;
-
-  document.getElementById(`G-direction-vector-01`).value = -3.38;
-  document.getElementById(`G-direction-vector-02`).value = 0.35;
-  document.getElementById(`G-direction-vector-03`).value = 7;
-}
-
-function drawLine() {
-  getLineValues();
+function calculateLength() {
   if (okayToDrawLine()) {
-    ggbApplet.evalCommand(`A_1= (${Base_Vec_G_a} , ${Base_Vec_G_b} ,${Base_Vec_G_c})`);
-    ggbApplet.setFixed(`A_1`, false, false);
+    ggbApplet.evalCommand(`S= Segment(P_1,P_2)`);
+    ggbApplet.setFixed(`S`, false, false);
+    ggbApplet.evalCommand('Text(" ["+Name(P_1)+ " " +Name(P_2)+" = "+S+"]", (Midpoint(P_1,P_2)), false)');
+    ggbApplet.setColor('text1', 230, 20, 20)
+    let lineBetweenTwoPoints = ggbApplet.getValueString("S");
+    document.getElementById(`length-between-points`).innerHTML = lineBetweenTwoPoints.substr(3, lineBetweenTwoPoints.length);
 
-    ggbApplet.evalCommand(`B_1= (${Direction_Vec1_G_a} , ${Direction_Vec1_G_b} ,${Direction_Vec1_G_c})`);
-    ggbApplet.setFixed(`B_1`, false, false);
-
-    ggbApplet.evalCommand(`G= Line(A_1,B_1)`);
   } else {
-    window.alert("Bitte zu erst alle Werte der Gerade eingeben")
+    window.alert("Bitte zu erst die Punkten P1, P2 zeichnen lassen")
   }
-
 
 }
 
-function drawPlane() {
-  getPlaneValues();
-  if (okayToDrawPlane()) {
+function updateLine(obj) {
 
-    ggbApplet.evalCommand('S = (0,0,0)');
-    ggbApplet.evalCommand(`A= (${Base_Vec_a} , ${Base_Vec_b} ,${Base_Vec_c})`);
-    ggbApplet.evalCommand(`baseVectorE = Vector(S,A)`);
-    ggbApplet.setFixed(`A`, false, false);
-
-    ggbApplet.evalCommand(`B= (${Direction_Vec1_a} , ${Direction_Vec1_b} ,${Direction_Vec1_c})`);
-    ggbApplet.evalCommand(`directionVector1E = Vector(A,B)`);
-    ggbApplet.setFixed(`B`, false, false);
-
-    ggbApplet.evalCommand(`C= (${Direction_Vec2_a} , ${Direction_Vec2_b} ,${Direction_Vec2_c})`);
-    ggbApplet.evalCommand(`directionVector2E = Vector(A,C)`);
-    ggbApplet.setFixed(`C`, false, false);
-
-    ggbApplet.evalCommand(`E= Plane(A,B,C)`);
-
-  } else {
-    window.alert("Bitte zu erst alle Werte der Ebene eingeben")
-  }
-}
-
-function findIntersection() {
-  if (okayToDrawFindIntersection()) {
-    ggbApplet.evalCommand(`Schnittpunkt = Intersect(E,G)`);
-    ggbApplet.setColor('Schnittpunkt', 255, 0, 0);
-
-    let intersectionPointString = ggbApplet.getValueString("Schnittpunkt");
-
-    let intersectionPointStringEdited = intersectionPointString.substring(16, intersectionPointString.length - 1);
-
-    let intersectionPointStringRow = intersectionPointStringEdited.replace(/\s/g, "");
-
-    document.getElementById(`intersection_point_x`).innerHTML = getCoordinate(intersectionPointStringRow, 'x');
-    document.getElementById(`intersection_point_y`).innerHTML = getCoordinate(intersectionPointStringRow, 'y');
-    document.getElementById(`intersection_point_z`).innerHTML = getCoordinate(intersectionPointStringRow, 'z');
-
-
-    // disableButtons();
-
-  } else {
-    window.alert("Bitte zu erst die Ebene und Gerade zeichnen lassen")
+  if (ggbApplet.getObjectType(obj) == "point") {
+    ggbApplet.deleteObject('text1');
+    calculateLength();
   }
 }
 
 function clearInputs() {
 
-  document.getElementById(`E-base-vector-01`).value = '';
-  document.getElementById(`E-base-vector-02`).value = '';
-  document.getElementById(`E-base-vector-03`).value = '';
-
-  document.getElementById(`E-direction-vector-01-a`).value = '';
-  document.getElementById(`E-direction-vector-01-b`).value = '';
-  document.getElementById(`E-direction-vector-01-c`).value = '';
-
-  document.getElementById(`E-direction-vector-02-a`).value = '';
-  document.getElementById(`E-direction-vector-02-b`).value = '';
-  document.getElementById(`E-direction-vector-02-c`).value = '';
-
-  document.getElementById(`G-base-vector-01`).value = '';
-  document.getElementById(`G-base-vector-02`).value = '';
-  document.getElementById(`G-base-vector-03`).value = '';
-
-  document.getElementById(`G-direction-vector-01`).value = '';
-  document.getElementById(`G-direction-vector-02`).value = '';
-  document.getElementById(`G-direction-vector-03`).value = '';
-
-
-  document.getElementById(`intersection_point_x`).innerHTML = ' - ';
-  document.getElementById(`intersection_point_y`).innerHTML = ' - ';
-  document.getElementById(`intersection_point_z`).innerHTML = ' - ';
-
+  for (let i = 1; i <= 2; i++) {
+    document.getElementById(`P${i}-x`).value = '';
+    document.getElementById(`P${i}-y`).value = '';
+    document.getElementById(`P${i}-z`).value = '';
+  }
+  document.getElementById(`length-between-points`).innerHTML = '...';
   // enableButtons();
 }
 
-function okayToDrawPlane() {
-  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Direction_Vec1_a && Direction_Vec1_b && Direction_Vec1_c && Direction_Vec2_a &&
-    Direction_Vec2_b && Direction_Vec2_c;
+function okayToDrawPoint(pointId) {
+  return document.getElementById(`P${pointId}-x`).value !== '' &&
+    document.getElementById(`P${pointId}-y`).value !== '' &&
+    document.getElementById(`P${pointId}-z`).value !== '';
 }
 
 function okayToDrawLine() {
-  return Base_Vec_G_a && Base_Vec_G_c && Base_Vec_G_c && Direction_Vec1_G_a && Direction_Vec1_G_b && Direction_Vec1_G_c;
-}
-
-
-function okayToDrawFindIntersection() {
-  return ggbApplet.getVisible('E') && ggbApplet.getVisible('G');
+  return ggbApplet.getVisible('P_1') && ggbApplet.getVisible('P_2');
 }
 
 function disableButtons() {
@@ -219,5 +110,53 @@ function getCoordinate(baseString, coordinateLetter) {
     }
   }
 }
+
+function randomInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function initGgApplet(informative) {
+
+  return informative ? new GGBApplet({
+    "appName": '3d',
+    "showMenuBar": true,
+    "showToolBar": true,
+    "enableLabelDrags": true,
+    "enableRightClick": true,
+    "errorDialogsActive": true,
+    "useBrowserForJS": true,
+    "enableUndoRedo": true,
+    "material_id": 'zu9afzy8',
+    "scaleContainerClass": "d-flex",
+    "autoHeight": true,
+    "borderColor": "rgba(106,104,104,0.24)",
+  }, true) : new GGBApplet({
+    "appName": '3d',
+    "showMenuBar": false,
+    "showToolBar": false,
+    "enableLabelDrags": false,
+    "enableRightClick": false,
+    "errorDialogsActive": false,
+    "useBrowserForJS": true,
+    "enableUndoRedo": false,
+    "material_id": 'zu9afzy8',
+    "scaleContainerClass": "d-flex",
+    "autoHeight": true,
+    "borderColor": "rgba(106,104,104,0.24)",
+  }, true);
+}
+
+function registerGbApplet() {
+  window.addEventListener("load", function () {
+    ggbApp.inject("ggb-element");
+  });
+
+}
+
+function init(informativeApplet) {
+  ggbApp = initGgApplet(informativeApplet);
+  registerGbApplet();
+}
+
 
 

@@ -60,7 +60,7 @@
       transform: scale(1.25);
     }
     .thumb-title {
-      background: theme-color(primary);
+      background: blue;
     }
   }
 }
@@ -94,7 +94,7 @@
     }
   }
   .border-bottom-blue {
-    border-bottom: solid 1px theme-color(primary);
+    border-bottom: solid 1px blue;
   }
   .vertical-menu {
     list-style: none;
@@ -115,7 +115,7 @@
         &:focus,
         &.active {
           text-decoration: none;
-          color: theme-color(dark);
+          color: black;
           font-weight: 600;
         }
       }
@@ -192,7 +192,7 @@
   }
   .comment-section {
     .comment-box {
-      background: theme-color(light);
+      background: white;
       padding: 25px 35px;
       margin-bottom: 24px;
       img {

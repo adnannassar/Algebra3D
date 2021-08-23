@@ -11,7 +11,7 @@ import {ScriptService} from "../../services/script.service";
 export class LineBetweenTwoPointsComponent implements OnInit {
   pointForm1: SafeHtml = '';
   pointForm2: SafeHtml = '';
-  intersectionForm: SafeHtml = '';
+  lineForm: SafeHtml = '';
 
   constructor(private _renderer2: Renderer2,
               @Inject(DOCUMENT) private _document: Document,
@@ -66,7 +66,7 @@ export class LineBetweenTwoPointsComponent implements OnInit {
   loadResultForm() {
     fetch('/assets/math-templates/line-between-two-points/line-output-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
-      this.intersectionForm = this.sanitizer.bypassSecurityTrustHtml(data);
+      this.lineForm = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 }
