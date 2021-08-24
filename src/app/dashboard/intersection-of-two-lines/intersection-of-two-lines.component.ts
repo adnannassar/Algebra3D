@@ -64,7 +64,7 @@ export class IntersectionOfTwoLinesComponent implements OnInit {
   }
 
   loadIntersectionPoint() {
-    fetch('/assets/math-templates/intersection-of-two-lines/point-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/intersection-of-two-lines/point-output-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.intersectionPoint = this.sanitizer.bypassSecurityTrustHtml(data);
     });

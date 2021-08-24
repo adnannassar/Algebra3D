@@ -1,3 +1,8 @@
+#no-intersection {
+  display: none;
+  color: lightcoral;
+}
+
 ::ng-deep .vector-input {
   max-width: 3rem;
   max-height: 2rem;
@@ -9,7 +14,7 @@
 }
 
 .result {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 

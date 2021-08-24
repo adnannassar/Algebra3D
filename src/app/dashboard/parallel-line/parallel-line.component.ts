@@ -10,8 +10,10 @@ import {ScriptService} from "../../services/script.service";
 })
 export class ParallelLineComponent implements OnInit {
 
-  lineForm1: SafeHtml = '';
-  lineForm2: SafeHtml = '';
+  lineInputForm1: SafeHtml = '';
+  lineInputForm2: SafeHtml = '';
+  lineOutputForm1: SafeHtml = '';
+  lineOutputForm2: SafeHtml = '';
 
   constructor(private _renderer2: Renderer2,
               @Inject(DOCUMENT) private _document: Document,
@@ -43,23 +45,37 @@ export class ParallelLineComponent implements OnInit {
   }
 
   async loadHtml() {
-    this.loadPoint1Form();
-    this.loadPoint2Form();
-
+    this.loadInputLie1Form();
+    this.loadInputLie2Form();
+    this.loadOutputLie1Form();
+    this.loadOutputLie2Form();
   }
 
 
-  loadPoint1Form() {
+  loadInputLie1Form() {
     fetch('/assets/math-templates/parallel-line/line1-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
-      this.lineForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
+      this.lineInputForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 
-  loadPoint2Form() {
+  loadInputLie2Form() {
     fetch('/assets/math-templates/parallel-line/line2-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
-      this.lineForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
+      this.lineInputForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
+    });
+  }
+
+  loadOutputLie1Form() {
+    fetch('/assets/math-templates/parallel-line/line1-output-form.html').then(res => res.text()).then(data => {
+      console.log('HTML loaded');
+      this.lineOutputForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
+    });
+  }
+  loadOutputLie2Form() {
+    fetch('/assets/math-templates/parallel-line/line2-output-form.html').then(res => res.text()).then(data => {
+      console.log('HTML loaded');
+      this.lineOutputForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 

@@ -63,7 +63,7 @@ function drawLine() {
 
 function updateLine(obj) {
 
-  if (ggbApplet.getObjectType(obj) == "point") {
+  if (ggbApplet.getObjectType(obj) === "point") {
     drawLine();
   }
 }

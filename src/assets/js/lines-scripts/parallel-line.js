@@ -1,190 +1,160 @@
-var ggbApp = new GGBApplet({
-  "appName": '3d',
-  "showMenuBar": false,
-  "showToolBar": false,
-  "enableLabelDrags": false,
-  "enableRightClick": false,
-  "errorDialogsActive": false,
-  "useBrowserForJS": true,
-  "enableUndoRedo": false,
-  "material_id": 'zu9afzy8',
-  "scaleContainerClass": "d-flex",
-  "autoHeight": true,
-  "borderColor": "rgba(106,104,104,0.24)",
-}, true);
+let ggbApp;
+init(false);
 
-
-window.addEventListener("load", function () {
-  ggbApp.inject("ggb-element");
-});
 
 let
-  Base_Vec_a, Base_Vec_b, Base_Vec_c,
-  Direction_Vec1_a, Direction_Vec1_b, Direction_Vec1_c,
-  Direction_Vec2_a, Direction_Vec2_b, Direction_Vec2_c,
-  Base_Vec_G_a, Base_Vec_G_b, Base_Vec_G_c, Direction_Vec1_G_a,
-  Direction_Vec1_G_b, Direction_Vec1_G_c;
+  G1_BaseVector_x, G1_BaseVector_y, G1_BaseVector_z,
+  G1_DirectionVector_x, G1_DirectionVector_y, G1_DirectionVector_z,
+  G2_BaseVector_x, G2_BaseVector_y, G2_BaseVector_z,
+  G2_DirectionVector_x, G2_DirectionVector_y, G2_DirectionVector_z;
 
 function reset() {
   clearInputs();
   document.ggbApplet.reset();
 }
 
-function getPlaneValues() {
-  Base_Vec_a = document.getElementById(`E-base-vector-01`).value;
-  Base_Vec_b = document.getElementById(`E-base-vector-02`).value;
-  Base_Vec_c = document.getElementById(`E-base-vector-03`).value;
-
-  Direction_Vec1_a = document.getElementById(`E-direction-vector-01-a`).value;
-  Direction_Vec1_b = document.getElementById(`E-direction-vector-01-b`).value;
-  Direction_Vec1_c = document.getElementById(`E-direction-vector-01-c`).value;
-
-  Direction_Vec2_a = document.getElementById(`E-direction-vector-02-a`).value;
-  Direction_Vec2_b = document.getElementById(`E-direction-vector-02-b`).value;
-  Direction_Vec2_c = document.getElementById(`E-direction-vector-02-c`).value;
-}
-
-function getLineValues() {
-  Base_Vec_G_a = document.getElementById(`G-base-vector-01`).value;
-  Base_Vec_G_b = document.getElementById(`G-base-vector-02`).value;
-  Base_Vec_G_c = document.getElementById(`G-base-vector-03`).value;
-
-  Direction_Vec1_G_a = document.getElementById(`G-direction-vector-01`).value;
-  Direction_Vec1_G_b = document.getElementById(`G-direction-vector-02`).value;
-  Direction_Vec1_G_c = document.getElementById(`G-direction-vector-03`).value;
-
-}
-
-function fillTestValuesInPlane() {
-  document.getElementById(`E-base-vector-01`).value = 2.39;
-  document.getElementById(`E-base-vector-02`).value = -3.2;
-  document.getElementById(`E-base-vector-03`).value = 4;
-
-  document.getElementById(`E-direction-vector-01-a`).value = 5.94;
-  document.getElementById(`E-direction-vector-01-b`).value = -4.35;
-  document.getElementById(`E-direction-vector-01-c`).value = 4;
-
-  document.getElementById(`E-direction-vector-02-a`).value = -2.63;
-  document.getElementById(`E-direction-vector-02-b`).value = -8.22;
-  document.getElementById(`E-direction-vector-02-c`).value = 3;
-}
-
-function fillTestValuesInLine() {
-  document.getElementById(`G-base-vector-01`).value = 0;
-  document.getElementById(`G-base-vector-02`).value = 4;
-  document.getElementById(`G-base-vector-03`).value = 0;
-
-  document.getElementById(`G-direction-vector-01`).value = -3.38;
-  document.getElementById(`G-direction-vector-02`).value = 0.35;
-  document.getElementById(`G-direction-vector-03`).value = 7;
-}
-
-function drawLine() {
-  getLineValues();
-  if (okayToDrawLine()) {
-    ggbApplet.evalCommand(`A_1= (${Base_Vec_G_a} , ${Base_Vec_G_b} ,${Base_Vec_G_c})`);
-    ggbApplet.setFixed(`A_1`, false, false);
-
-    ggbApplet.evalCommand(`B_1= (${Direction_Vec1_G_a} , ${Direction_Vec1_G_b} ,${Direction_Vec1_G_c})`);
-    ggbApplet.setFixed(`B_1`, false, false);
-
-    ggbApplet.evalCommand(`G= Line(A_1,B_1)`);
+function getLineValues(lineId) {
+  if (lineId === 1) {
+    G1_BaseVector_x = document.getElementById(`G${lineId}-base-vector-x`).value;
+    G1_BaseVector_y = document.getElementById(`G${lineId}-base-vector-y`).value;
+    G1_BaseVector_z = document.getElementById(`G${lineId}-base-vector-z`).value;
+    G1_DirectionVector_x = document.getElementById(`G${lineId}-direction-vector-x`).value;
+    G1_DirectionVector_y = document.getElementById(`G${lineId}-direction-vector-y`).value;
+    G1_DirectionVector_z = document.getElementById(`G${lineId}-direction-vector-z`).value;
   } else {
-    window.alert("Bitte zu erst alle Werte der Gerade eingeben")
+    G2_BaseVector_x = document.getElementById(`G${lineId}-base-vector-x`).value;
+    G2_BaseVector_y = document.getElementById(`G${lineId}-base-vector-y`).value;
+    G2_BaseVector_z = document.getElementById(`G${lineId}-base-vector-z`).value;
+    G2_DirectionVector_x = document.getElementById(`G${lineId}-direction-vector-x`).value;
+    G2_DirectionVector_y = document.getElementById(`G${lineId}-direction-vector-y`).value;
+    G2_DirectionVector_z = document.getElementById(`G${lineId}-direction-vector-z`).value;
   }
 
-
 }
 
-function drawPlane() {
-  getPlaneValues();
-  if (okayToDrawPlane()) {
+function fillTestValuesInLine(lineId) {
+  document.getElementById(`G${lineId}-base-vector-x`).value = randomInRange(1, 5);
+  document.getElementById(`G${lineId}-base-vector-y`).value = randomInRange(1, 5);
+  document.getElementById(`G${lineId}-base-vector-z`).value = randomInRange(1, 5);
+  document.getElementById(`G${lineId}-direction-vector-x`).value = randomInRange(1, 5);
+  document.getElementById(`G${lineId}-direction-vector-y`).value = randomInRange(1, 5);
+  document.getElementById(`G${lineId}-direction-vector-z`).value = randomInRange(1, 5);
+}
 
-    ggbApplet.evalCommand('S = (0,0,0)');
-    ggbApplet.evalCommand(`A= (${Base_Vec_a} , ${Base_Vec_b} ,${Base_Vec_c})`);
-    ggbApplet.evalCommand(`baseVectorE = Vector(S,A)`);
-    ggbApplet.setFixed(`A`, false, false);
+function drawLine(lineId) {
+  getLineValues(lineId);
+  if (okayToDrawLine(lineId)) {
+    if (lineId === 1) {
+      ggbApplet.evalCommand(`A_${lineId}= (${G1_BaseVector_x} , ${G1_BaseVector_y} ,${G1_BaseVector_z})`);
+      ggbApplet.setFixed(`A_${lineId}`, false, false);
 
-    ggbApplet.evalCommand(`B= (${Direction_Vec1_a} , ${Direction_Vec1_b} ,${Direction_Vec1_c})`);
-    ggbApplet.evalCommand(`directionVector1E = Vector(A,B)`);
-    ggbApplet.setFixed(`B`, false, false);
+      ggbApplet.evalCommand(`B_${lineId}= (${G1_DirectionVector_x} , ${G1_DirectionVector_y} ,${G1_DirectionVector_z})`);
+      ggbApplet.setFixed(`B_${lineId}`, false, false);
 
-    ggbApplet.evalCommand(`C= (${Direction_Vec2_a} , ${Direction_Vec2_b} ,${Direction_Vec2_c})`);
-    ggbApplet.evalCommand(`directionVector2E = Vector(A,C)`);
-    ggbApplet.setFixed(`C`, false, false);
+      ggbApplet.evalCommand(`G_${lineId}= Line(A_${lineId},B_${lineId})`);
+      ggbApplet.setColor('G_1', 220, 20, 60);
+    } else {
+      ggbApplet.evalCommand(`A_${lineId}= (${G2_BaseVector_x} , ${G2_BaseVector_y} ,${G2_BaseVector_z})`);
+      ggbApplet.setFixed(`A_${lineId}`, false, false);
 
-    ggbApplet.evalCommand(`E= Plane(A,B,C)`);
+      ggbApplet.evalCommand(`B_${lineId}= (${G2_DirectionVector_x} , ${G2_DirectionVector_y} ,${G2_DirectionVector_z})`);
+      ggbApplet.setFixed(`B_${lineId}`, false, false);
+
+      ggbApplet.evalCommand(`G_${lineId}= Line(A_${lineId},B_${lineId})`);
+      ggbApplet.setColor('G_2', 0, 128, 128);
+    }
+    // ggbApplet.registerUpdateListener("updateLine");
 
   } else {
-    window.alert("Bitte zu erst alle Werte der Ebene eingeben")
+    window.alert(`Bitte zu erst alle Werte der Gerade G${lineId} eingeben`);
   }
 }
 
-function findIntersection() {
-  if (okayToDrawFindIntersection()) {
-    ggbApplet.evalCommand(`Schnittpunkt = Intersect(E,G)`);
-    ggbApplet.setColor('Schnittpunkt', 255, 0, 0);
+function okayToDrawLine(lineId) {
+  return document.getElementById(`G${lineId}-base-vector-x`).value !== '' &&
+    document.getElementById(`G${lineId}-base-vector-y`).value !== '' &&
+    document.getElementById(`G${lineId}-base-vector-z`).value !== '' &&
+    document.getElementById(`G${lineId}-direction-vector-x`).value !== '' &&
+    document.getElementById(`G${lineId}-direction-vector-y`).value !== '' &&
+    document.getElementById(`G${lineId}-direction-vector-z`).value !== '';
+}
 
-    let intersectionPointString = ggbApplet.getValueString("Schnittpunkt");
+function drawParallelLineToLine(lineId) {
+  if (ggbApplet.getVisible(`G_${lineId}`)) {
+    ggbApplet.evalCommand(`PToG_${lineId}= Line((1,1,1),G_${lineId})`);
+    if (lineId === 1) {
+      ggbApplet.setColor('PToG_1', 255, 127, 80);
+      document.getElementById('output-container-1').style.display = 'block';
+      let parallelLine1 = ggbApplet.getValueString("PToG_1");
+      let parallelLine1BaseVector = parallelLine1.split('+')[0].replace(/\s/g, "");
+      let parallelLine1DirectionVector = parallelLine1.split('+')[1].replace(/\s/g, "");
+      let parallelLine1BaseVectorRow = parallelLine1BaseVector.substring(10, parallelLine1BaseVector.length - 1);
+      let parallelLine1DirectionVectorRow = parallelLine1DirectionVector.substring(2, parallelLine1DirectionVector.length - 1);
 
-    let intersectionPointStringEdited = intersectionPointString.substring(16, intersectionPointString.length - 1);
+      document.getElementById(`G1-OUT-base-vector-x`).value = getCoordinate(parallelLine1BaseVectorRow, 'x');
+      document.getElementById(`G1-OUT-base-vector-y`).value = getCoordinate(parallelLine1BaseVectorRow, 'y');
+      document.getElementById(`G1-OUT-base-vector-z`).value = getCoordinate(parallelLine1BaseVectorRow, 'z');
+      document.getElementById(`G1-OUT-direction-vector-x`).value = getCoordinate(parallelLine1DirectionVectorRow, 'x');
+      document.getElementById(`G1-OUT-direction-vector-y`).value = getCoordinate(parallelLine1DirectionVectorRow, 'y');
+      document.getElementById(`G1-OUT-direction-vector-z`).value = getCoordinate(parallelLine1DirectionVectorRow, 'z');
 
-    let intersectionPointStringRow = intersectionPointStringEdited.replace(/\s/g, "");
+    } else {
+      ggbApplet.setColor('PToG_2', 0, 206, 209);
+      document.getElementById('output-container-2').style.display = 'block';
+      let parallelLine2 = ggbApplet.getValueString("PToG_2");
+      let parallelLine2BaseVector = parallelLine2.split('+')[0].replace(/\s/g, "");
+      let parallelLine2DirectionVector = parallelLine2.split('+')[1].replace(/\s/g, "");
+      let parallelLine2BaseVectorRow = parallelLine2BaseVector.substring(10, parallelLine2BaseVector.length - 1);
+      let parallelLine2DirectionVectorRow = parallelLine2DirectionVector.substring(2, parallelLine2DirectionVector.length - 1);
 
-    document.getElementById(`intersection_point_x`).innerHTML = getCoordinate(intersectionPointStringRow, 'x');
-    document.getElementById(`intersection_point_y`).innerHTML = getCoordinate(intersectionPointStringRow, 'y');
-    document.getElementById(`intersection_point_z`).innerHTML = getCoordinate(intersectionPointStringRow, 'z');
-
-
-    // disableButtons();
-
+      document.getElementById(`G2-OUT-base-vector-x`).value = getCoordinate(parallelLine2BaseVectorRow, 'x');
+      document.getElementById(`G2-OUT-base-vector-y`).value = getCoordinate(parallelLine2BaseVectorRow, 'y');
+      document.getElementById(`G2-OUT-base-vector-z`).value = getCoordinate(parallelLine2BaseVectorRow, 'z');
+      document.getElementById(`G2-OUT-direction-vector-x`).value = getCoordinate(parallelLine2DirectionVectorRow, 'x');
+      document.getElementById(`G2-OUT-direction-vector-y`).value = getCoordinate(parallelLine2DirectionVectorRow, 'y');
+      document.getElementById(`G2-OUT-direction-vector-z`).value = getCoordinate(parallelLine2DirectionVectorRow, 'z');
+    }
   } else {
-    window.alert("Bitte zu erst die Ebene und Gerade zeichnen lassen")
+    window.alert(`Bitte zu erst die Gerade G${lineId} zeichnen lassen`);
   }
 }
+
+function checkParallelism(lineId) {
+  if (ggbApplet.getVisible('G_1') && ggbApplet.getVisible('G_2')) {
+    // AreParallel(Line((1,1),(2,2)),Line((1,1),(3,3)))
+    var areParallel = ggbApplet.evalCommand(`AreParallel(Line((1,1),(2,2)),Line((1,1),(3,3)))`);
+    console.log('areParallel: ', areParallel);
+  } else {
+    window.alert(`Bitte zu erst die Gerade G1 und G2 zeichnen lassen`);
+  }
+}
+function updateLine(obj) {
+
+  if (ggbApplet.getObjectType(obj) == "point") {
+    drawLine();
+  }
+}
+
 
 function clearInputs() {
 
-  document.getElementById(`E-base-vector-01`).value = '';
-  document.getElementById(`E-base-vector-02`).value = '';
-  document.getElementById(`E-base-vector-03`).value = '';
-
-  document.getElementById(`E-direction-vector-01-a`).value = '';
-  document.getElementById(`E-direction-vector-01-b`).value = '';
-  document.getElementById(`E-direction-vector-01-c`).value = '';
-
-  document.getElementById(`E-direction-vector-02-a`).value = '';
-  document.getElementById(`E-direction-vector-02-b`).value = '';
-  document.getElementById(`E-direction-vector-02-c`).value = '';
-
-  document.getElementById(`G-base-vector-01`).value = '';
-  document.getElementById(`G-base-vector-02`).value = '';
-  document.getElementById(`G-base-vector-03`).value = '';
-
-  document.getElementById(`G-direction-vector-01`).value = '';
-  document.getElementById(`G-direction-vector-02`).value = '';
-  document.getElementById(`G-direction-vector-03`).value = '';
-
-
-  document.getElementById(`intersection_point_x`).innerHTML = ' - ';
-  document.getElementById(`intersection_point_y`).innerHTML = ' - ';
-  document.getElementById(`intersection_point_z`).innerHTML = ' - ';
+  for (let i = 1; i <= 2; i++) {
+    document.getElementById(`G${i}-base-vector-x`).value = '';
+    document.getElementById(`G${i}-base-vector-y`).value = '';
+    document.getElementById(`G${i}-base-vector-z`).value = '';
+    document.getElementById(`G${i}-direction-vector-x`).value = '';
+    document.getElementById(`G${i}-direction-vector-y`).value = '';
+    document.getElementById(`G${i}-direction-vector-z`).value = '';
+    document.getElementById(`G${i}-OUT-base-vector-x`).value = '';
+    document.getElementById(`G${i}-OUT-base-vector-y`).value = '';
+    document.getElementById(`G${i}-OUT-base-vector-z`).value = '';
+    document.getElementById(`G${i}-OUT-direction-vector-x`).value = '';
+    document.getElementById(`G${i}-OUT-direction-vector-y`).value = '';
+    document.getElementById(`G${i}-OUT-direction-vector-z`).value = '';
+    document.getElementById(`output-container-${i}`).style.display = 'none';
+  }
 
   // enableButtons();
-}
-
-function okayToDrawPlane() {
-  return Base_Vec_a && Base_Vec_b && Base_Vec_c && Direction_Vec1_a && Direction_Vec1_b && Direction_Vec1_c && Direction_Vec2_a &&
-    Direction_Vec2_b && Direction_Vec2_c;
-}
-
-function okayToDrawLine() {
-  return Base_Vec_G_a && Base_Vec_G_c && Base_Vec_G_c && Direction_Vec1_G_a && Direction_Vec1_G_b && Direction_Vec1_G_c;
-}
-
-
-function okayToDrawFindIntersection() {
-  return ggbApplet.getVisible('E') && ggbApplet.getVisible('G');
 }
 
 function disableButtons() {
@@ -219,5 +189,55 @@ function getCoordinate(baseString, coordinateLetter) {
     }
   }
 }
+
+function randomInRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function initGgApplet(informative) {
+
+  return informative ? new GGBApplet({
+    "appName": '3d',
+    "showMenuBar": true,
+    "showToolBar": true,
+    "enableLabelDrags": true,
+    "enableRightClick": true,
+    "errorDialogsActive": true,
+    "useBrowserForJS": true,
+    "enableUndoRedo": true,
+    "material_id": 'zu9afzy8',
+    "scaleContainerClass": "d-flex",
+    "autoHeight": true,
+    "borderColor": "rgba(106,104,104,0.24)",
+  }, true) : new GGBApplet({
+    "appName": '3d',
+    "showMenuBar": false,
+    "showToolBar": false,
+    "enableLabelDrags": false,
+    "enableRightClick": false,
+    "errorDialogsActive": false,
+    "useBrowserForJS": true,
+    "enableUndoRedo": false,
+    "material_id": 'zu9afzy8',
+    "scaleContainerClass": "d-flex",
+    "autoHeight": true,
+    "borderColor": "rgba(106,104,104,0.24)",
+  }, true);
+}
+
+function registerGbApplet() {
+  window.addEventListener("load", function () {
+    ggbApp.inject("ggb-element");
+  });
+
+}
+
+function init(informative) {
+  ggbApp = initGgApplet(informative);
+  registerGbApplet();
+}
+
+
+
 
 

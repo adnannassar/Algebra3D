@@ -1,4 +1,9 @@
 
+#output-container-1, #output-container-2 {
+  display: none;
+}
+
+
 .content {
   margin-left: 2rem;
   margin-right: 2rem;
