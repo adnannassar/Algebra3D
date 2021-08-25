@@ -1,0 +1,72 @@
+<div class="content-wrapper">
+  <div class="content-overflow">
+    <div class="container">
+      <div class="row justify-content-center " data-aos="fade-up">
+        <div class="col-xl-12">
+          <div class="bg-white main-img-radius-top main-img-radius-bottom">
+            <div class="card-body">
+              <div class="d-flex border-bottom py-4  justify-content-center">
+                <div class="content" [innerHTML]="planeInputForm1">...</div>
+              </div>
+              <div class="d-flex border-bottom py-4  justify-content-center">
+                <div class="content" [innerHTML]="planeInputForm2">...</div>
+              </div>
+              <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
+                <button id="fillGBtn1" class="btn btn-outline-primary m-2 flex-grow-1"
+                        onclick="fillTestValuesInPlane(1);">E1 mit
+                  Random Werte füllen
+                </button>
+                <button id="fillGBtn2" class="btn btn-outline-primary m-2 flex-grow-1"
+                        onclick="fillTestValuesInPlane(2);">E2 mit
+                  Random Werte füllen
+                </button>
+                <button id="drawGBtn1" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(1);">E1
+                  zeichnen
+                </button>
+                <button id="drawGBtn2" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPlane(2);">E2
+                  zeichnen
+                </button>
+                <button id="parallelTo1Btn" class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="drawParallelPlaneToPlane(1)">Parallele Ebene zur E1 zeichnen
+                </button>
+                <button id="parallelTo2Btn" class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="drawParallelPlaneToPlane(2)">Parallele Ebene zur E2 zeichnen
+                </button>
+
+                <button id="intersectionBtn" class="btn btn-outline-success m-2 flex-grow-1"
+                        disabled onclick="checkParallelismOfPlanes(2)">Parallelität der E1,E2 prüfen
+                </button>
+                <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
+              </div>
+              <div id="output-container-1">
+                <h2 class="result text-center pt-3">Parallel Gerade zur G1 durch den Punkt (1|1|1)</h2>
+                <div class="d-flex border-bottom py-4  justify-content-center">
+                  <div class="content" [innerHTML]="planeOutputForm1">...</div>
+                </div>
+              </div>
+
+              <div id="output-container-2">
+                <h2 class="result text-center pt-3">Parallel Gerade zur G2 durch den Punkt (1|1|1)</h2>
+                <div class="d-flex border-bottom py-4  justify-content-center">
+                  <div class="content" [innerHTML]="planeOutputForm2">...</div>
+                </div>
+              </div>
+              <div class="d-flex py-4 align-items-center justify-content-center">
+                <div id="ggb-element"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
