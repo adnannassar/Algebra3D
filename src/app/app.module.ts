@@ -12,6 +12,7 @@ import { LineBetweenTwoPointsComponent } from './dashboard/line-between-two-poin
 import { LengthBetweenTwoPointsComponent } from './dashboard/length-between-two-points/length-between-two-points.component';
 import { ParallelLineComponent } from './dashboard/parallel-line/parallel-line.component';
 import { IntersectionOfTwoLinesComponent } from './dashboard/intersection-of-two-lines/intersection-of-two-lines.component';
+import { ParallelPlaneComponent } from './dashboard/parallel-plane/parallel-plane.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { IntersectionOfTwoLinesComponent } from './dashboard/intersection-of-two
     LineBetweenTwoPointsComponent,
     LengthBetweenTwoPointsComponent,
     ParallelLineComponent,
-    IntersectionOfTwoLinesComponent
+    IntersectionOfTwoLinesComponent,
+    ParallelPlaneComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

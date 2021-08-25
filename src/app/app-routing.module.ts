@@ -8,18 +8,19 @@ import {LineBetweenTwoPointsComponent} from "./dashboard/line-between-two-points
 import {LengthBetweenTwoPointsComponent} from "./dashboard/length-between-two-points/length-between-two-points.component";
 import {ParallelLineComponent} from "./dashboard/parallel-line/parallel-line.component";
 import {IntersectionOfTwoLinesComponent} from "./dashboard/intersection-of-two-lines/intersection-of-two-lines.component";
+import {ParallelPlaneComponent} from "./dashboard/parallel-plane/parallel-plane.component";
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
+  {path: 'line-between-two-points', component: LineBetweenTwoPointsComponent},
+  {path: 'length-between-two-points', component: LengthBetweenTwoPointsComponent},
+  {path: 'parallel-line', component: ParallelLineComponent},
+  {path: 'intersection-of-two-lines', component: IntersectionOfTwoLinesComponent},
+  {path: 'intersection-plane-and-line', component: IntersectionPlaneAndLineComponent},
   {path: 'intersection-planes', component: IntersectionTwoPlanesComponent},
-  {path: 'intersection-plane-and-line' , component: IntersectionPlaneAndLineComponent},
-  {path: 'line-between-two-points' , component: LineBetweenTwoPointsComponent},
-  {path: 'length-between-two-points' , component: LengthBetweenTwoPointsComponent},
-  {path: 'parallel-line' , component: ParallelLineComponent},
-  {path: 'intersection-of-two-lines' , component: IntersectionOfTwoLinesComponent}
-
+  {path: 'parallel-plane', component: ParallelPlaneComponent}
 ];
 
 
@@ -27,8 +28,8 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule, RouterModule.forRoot(routes, {
-    initialNavigation: 'enabled'
-})],
+      initialNavigation: 'enabled'
+    })],
   exports: [RouterModule]
 })
 
