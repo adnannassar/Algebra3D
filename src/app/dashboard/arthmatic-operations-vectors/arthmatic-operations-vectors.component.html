@@ -13,28 +13,42 @@
               </div>
               <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
                 <button id="fillEBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInLine(1);">G1 mit
+                        onclick="fillTestValuesInVector(1);">V1 mit
                   Random Werte füllen
                 </button>
                 <button id="fillGBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInLine(2);">G2 mit
+                        onclick="fillTestValuesInVector(2);">V2 mit
                   Random Werte füllen
                 </button>
-                <button id="drawEBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawLine(1);">G1
+                <button id="drawEBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawVector(1);">V1
                   zeichnen
                 </button>
-                <button id="drawGBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawLine(2);">G2
+                <button id="drawGBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawVector(2);">V2
                   zeichnen
                 </button>
-                <button id="intersectionBtn" class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="findIntersectionPointBetweenTwoLines()">Schnittpunkt
+                <button class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="addTwoVectors()">V1 + V2
+                </button>
+                <button class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="subTwoVectors()">V1 - V2
+                </button>
+                <button class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="mulTwoVectors()">V1 * V2
+                </button>
+                <button class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="divTwoVectors()">V1 / V2
+                </button>
+                <button class="btn btn-outline-success m-2 flex-grow-1"
+                        onclick="scalarProduct()">Skalarprodukt
                 </button>
                 <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
               </div>
-              <h2 class="result text-center pt-3">Schnittpunkt</h2>
-              <div class="d-flex py-4 align-items-center justify-content-center">
-                <div class="d-flex py-4 justify-content-center">
-                  <div class="content" [innerHTML]="vectorOutputForm">...</div>
+              <div id="result-container">
+                <h2 class="result text-center pt-3">Ergebniss Vektor V<sub>3</sub></h2>
+                <div class="d-flex py-4 align-items-center justify-content-center">
+                  <div class="d-flex py-4 justify-content-center">
+                    <div class="content" [innerHTML]="vectorOutputForm">...</div>
+                  </div>
                 </div>
               </div>
               <div class="d-flex py-4 justify-content-center">

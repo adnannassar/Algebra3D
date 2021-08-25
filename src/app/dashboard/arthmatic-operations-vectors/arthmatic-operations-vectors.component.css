@@ -2,6 +2,10 @@
   height: 100%;
 }
 
+#result-container {
+  display: none;
+}
+
 #no-intersection {
   display: none;
   color: lightcoral;
