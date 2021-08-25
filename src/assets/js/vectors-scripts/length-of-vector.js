@@ -1,5 +1,5 @@
 let ggbApp;
-init(false);
+init(true);
 
 
 let
@@ -51,8 +51,9 @@ function okayToDrawVector() {
 
 function calculateLengthOfVector() {
   if (okayToCalculateLengthOfVecor()) {
-
-
+    if (ggbApplet.getVisible('text1')) {
+      ggbApplet.deleteObject('text1');
+    }
     ggbApplet.evalCommand('l = Distance(A,B)')
 
     ggbApplet.evalCommand('Text(" ["+Name(A)+ " " +Name(B)+" = "+l+"]", (Midpoint(A,B)), false)');
@@ -74,6 +75,7 @@ function updateVector(obj) {
 
   if (ggbApplet.getObjectType(obj) === "vector") {
     ggbApplet.deleteObject('text1');
+
     calculateLengthOfVector();
   }
 }
@@ -82,11 +84,11 @@ function updateVector(obj) {
 function clearInputs() {
 
   for (let i = 1; i <= 2; i++) {
-    document.getElementById(`V${i}-x`).value = '';
-    document.getElementById(`V${i}-y`).value = '';
-    document.getElementById(`V${i}-z`).value = '';
+    document.getElementById(`V-x`).value = '';
+    document.getElementById(`V-y`).value = '';
+    document.getElementById(`V-z`).value = '';
   }
-  document.getElementById(`angel-result`).innerHTML = '';
+  document.getElementById(`length-result`).innerHTML = '';
 
   // enableButtons();
 }

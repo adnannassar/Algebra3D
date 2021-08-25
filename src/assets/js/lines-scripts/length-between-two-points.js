@@ -36,6 +36,9 @@ function drawPoint(pointId) {
 
 function calculateLength() {
   if (okayToDrawLine()) {
+    if (ggbApplet.getVisible('text1')) {
+      ggbApplet.deleteObject('text1');
+    }
     ggbApplet.evalCommand(`S= Segment(P_1,P_2)`);
     ggbApplet.setFixed(`S`, false, false);
     ggbApplet.evalCommand('Text(" ["+Name(P_1)+ " " +Name(P_2)+" = "+S+"]", (Midpoint(P_1,P_2)), false)');
