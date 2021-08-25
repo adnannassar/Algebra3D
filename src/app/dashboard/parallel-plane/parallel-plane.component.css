@@ -1,44 +1,34 @@
-.content-overflow {
-  height: 100%;
-}
 
 #output-container-1, #output-container-2 {
   display: none;
 }
 
-
 .content {
   margin-left: 2rem;
   margin-right: 2rem;
+}
+.content-overflow {
+  height: 100%;
 }
 
 ::ng-deep .vector-input {
   max-width: 3rem;
   max-height: 2rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   text-align: center;
   border: 1px solid lightgray;
   border-radius: 0.2rem;
   margin: 0.1rem;
 }
 
-.result {
-  font-size: 1.5rem;
-}
-
 
 /*Media Queries*/
 @media only screen and (max-device-width: 767px) {
   ::ng-deep .math {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
-
   ::ng-deep .vector-input {
-    max-width: 2.5rem;
-  }
-
-  .result {
-    font-size: 1.6rem;
+    max-width: 2rem;
   }
 }
 
@@ -47,41 +37,23 @@
   ::ng-deep .vector-input {
     max-width: 1.7rem;
   }
-
-  .result {
-    font-size: 1.4rem;
-  }
 }
 
 @media only screen and (max-device-width: 491px) {
 
   ::ng-deep .math {
-    font-size: 1.3rem;
+    font-size: 0.9rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 1.5rem;
-  }
-
-  .result {
-    font-size: 1.2rem;
   }
 }
 
 @media only screen and (max-device-width: 454px) {
 
   ::ng-deep .math {
-    font-size: 1.1rem;
+    font-size: 0.8rem;
   }
-
-  ::ng-deep .vector-input {
-    max-width: 1.1rem;
-  }
-
-  .result {
-    font-size: 1.2rem;
-  }
-
 }
 
 @media only screen and (max-device-width: 414px) {
@@ -98,9 +70,8 @@
 
 @media only screen and (max-device-width: 398px) {
   ::ng-deep .math {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 1.1rem;
   }
@@ -115,9 +86,8 @@
 
 @media only screen and (max-device-width: 369px) {
   ::ng-deep .math {
-    font-size: 1rem;
+    font-size: 0.7rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 1rem;
   }
@@ -125,9 +95,8 @@
 
 @media only screen and (max-device-width: 351px) {
   ::ng-deep .math {
-    font-size: 0.9rem;
+    font-size: 0.65rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 1rem;
   }
@@ -135,9 +104,8 @@
 
 @media only screen and (max-device-width: 331px) {
   ::ng-deep .math {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 1rem;
   }
@@ -145,9 +113,8 @@
 
 @media only screen and (max-device-width: 313px) {
   ::ng-deep .math {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
   }
-
   ::ng-deep .vector-input {
     max-width: 0.8rem;
   }

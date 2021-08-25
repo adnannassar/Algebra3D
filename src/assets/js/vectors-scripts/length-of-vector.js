@@ -1,5 +1,5 @@
 let ggbApp;
-init(true);
+init(false);
 
 
 let
