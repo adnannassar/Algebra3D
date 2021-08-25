@@ -50,14 +50,14 @@ export class AngleBetweenTwoVectorsComponent implements OnInit {
   }
 
   loadLine1InputForm1() {
-    fetch('/assets/math-templates/angle-between-two-vectors/line1-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/angle-between-two-vectors/vector1-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.lineForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 
   loadLine2InputForm1() {
-    fetch('/assets/math-templates/angle-between-two-vectors/line2-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/angle-between-two-vectors/vector2-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
       this.lineForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
     });
