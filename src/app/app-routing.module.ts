@@ -11,20 +11,26 @@ import {IntersectionOfTwoLinesComponent} from "./dashboard/intersection-of-two-l
 import {ParallelPlaneComponent} from "./dashboard/parallel-plane/parallel-plane.component";
 import {AngleBetweenTwoVectorsComponent} from "./dashboard/angle-between-two-vectors/angle-between-two-vectors.component";
 import {LengthOfVectorComponent} from "./dashboard/length-of-vector/length-of-vector.component";
+import {ArthmaticOperationsVectorsComponent} from "./dashboard/arthmatic-operations-vectors/arthmatic-operations-vectors.component";
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'dashboard', component: DashboardComponent},
+
+
   {path: 'line-between-two-points', component: LineBetweenTwoPointsComponent},
   {path: 'length-between-two-points', component: LengthBetweenTwoPointsComponent},
   {path: 'parallel-line', component: ParallelLineComponent},
+
   {path: 'intersection-of-two-lines', component: IntersectionOfTwoLinesComponent},
+  {path: 'length-of-vector', component: LengthOfVectorComponent},
+  {path: 'angle-between-two-vectors', component: AngleBetweenTwoVectorsComponent},
+  {path: 'arithmetic-operations-vectors', component: ArthmaticOperationsVectorsComponent},
+
   {path: 'intersection-plane-and-line', component: IntersectionPlaneAndLineComponent},
   {path: 'intersection-planes', component: IntersectionTwoPlanesComponent},
-  {path: 'parallel-plane', component: ParallelPlaneComponent},
-  {path: 'length-of-vector', component: LengthOfVectorComponent},
-  {path: 'angle-between-two-vectors', component: AngleBetweenTwoVectorsComponent}
+  {path: 'parallel-plane', component: ParallelPlaneComponent}
 ];
 
 

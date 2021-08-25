@@ -45,6 +45,14 @@ export class DashboardComponent implements OnInit {
       });
   }
 
+  navigateToArithmeticOperationsVectors() {
+    this.router.navigate(['arithmetic-operations-vectors'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
+
   navigateToParallelPlane() {
     this.router.navigate(['parallel-plane'])
       .then(() => {

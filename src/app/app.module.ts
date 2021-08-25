@@ -15,6 +15,7 @@ import { IntersectionOfTwoLinesComponent } from './dashboard/intersection-of-two
 import { ParallelPlaneComponent } from './dashboard/parallel-plane/parallel-plane.component';
 import {AngleBetweenTwoVectorsComponent} from "./dashboard/angle-between-two-vectors/angle-between-two-vectors.component";
 import {LengthOfVectorComponent} from "./dashboard/length-of-vector/length-of-vector.component";
+import { ArthmaticOperationsVectorsComponent } from './dashboard/arthmatic-operations-vectors/arthmatic-operations-vectors.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import {LengthOfVectorComponent} from "./dashboard/length-of-vector/length-of-ve
     LengthBetweenTwoPointsComponent,
     ParallelLineComponent,
     IntersectionOfTwoLinesComponent,
+    ParallelPlaneComponent,
+    ArthmaticOperationsVectorsComponent,
     ParallelPlaneComponent,
     AngleBetweenTwoVectorsComponent,
     LengthOfVectorComponent
