@@ -2,80 +2,93 @@ let ggbApp;
 init(false);
 
 
-let P1_x, P1_y, P1_z;
+let
+  V_x, V_y, V_z;
 
 function reset() {
   clearInputs();
   document.ggbApplet.reset();
 }
 
-function getPointValues(pointId) {
-  P1_x = document.getElementById(`P${pointId}-x`).value;
-  P1_y = document.getElementById(`P${pointId}-y`).value;
-  P1_z = document.getElementById(`P${pointId}-z`).value;
+function getVectorValues() {
+  V_x = document.getElementById(`V-x`).value;
+  V_y = document.getElementById(`V-y`).value;
+  V_z = document.getElementById(`V-z`).value;
 }
 
-function fillTestValuesInPoint(pointId) {
-  document.getElementById(`P${pointId}-x`).value = randomInRange(1, 5)
-  document.getElementById(`P${pointId}-y`).value = randomInRange(1, 5)
-  document.getElementById(`P${pointId}-z`).value = randomInRange(1, 5)
+function fillTestValuesInVector() {
+  document.getElementById(`V-x`).value = randomInRange(1, 5);
+  document.getElementById(`V-y`).value = randomInRange(1, 5);
+  document.getElementById(`V-z`).value = randomInRange(1, 5);
 }
 
-function drawPoint(pointId) {
-  getPointValues(pointId);
-  if (okayToDrawPoint(pointId)) {
-    ggbApplet.evalCommand(`P_${pointId}= (${P1_x} , ${P1_y} ,${P1_z})`);
-    ggbApplet.setFixed(`P_${pointId}`, false, false);
+function drawVector() {
+  getVectorValues();
+  if (okayToDrawVector()) {
 
-    ggbApplet.registerUpdateListener("updateLine");
+    ggbApplet.evalCommand(`A= (0,0,0)`);
+    ggbApplet.setFixed(`A`, false, false);
+    ggbApplet.setVisible(`A`, false);
+
+    ggbApplet.evalCommand(`B=(${V_x} , ${V_y} ,${V_z})`);
+    ggbApplet.setFixed(`B`, false, false);
+
+    ggbApplet.evalCommand(`V= Vector(A,B)`);
+
+    ggbApplet.registerUpdateListener("updateVector");
 
   } else {
-    window.alert(`Bitte zu erst alle Werte des Punktes ${pointId} eingeben`);
+    window.alert(`Bitte zu erst alle Werte des Vektors V eingeben`);
   }
 }
 
-function calculateLength() {
-  if (okayToDrawLine()) {
-    ggbApplet.evalCommand(`S= Segment(P_1,P_2)`);
-    ggbApplet.setFixed(`S`, false, false);
-    ggbApplet.evalCommand('Text(" ["+Name(P_1)+ " " +Name(P_2)+" = "+S+"]", (Midpoint(P_1,P_2)), false)');
+
+function okayToDrawVector() {
+  return document.getElementById(`V-x`).value !== '' &&
+    document.getElementById(`V-y`).value !== '' &&
+    document.getElementById(`V-z`).value !== '';
+}
+
+function calculateLengthOfVector() {
+  if (okayToCalculateLengthOfVecor()) {
+
+
+    ggbApplet.evalCommand('l = Distance(A,B)')
+
+    ggbApplet.evalCommand('Text(" ["+Name(A)+ " " +Name(B)+" = "+l+"]", (Midpoint(A,B)), false)');
     ggbApplet.setColor('text1', 128, 0, 128);
-    let lineBetweenTwoPoints = ggbApplet.getValueString("S");
-    document.getElementById(`length-between-points`).innerHTML = lineBetweenTwoPoints.substr(3, lineBetweenTwoPoints.length);
 
+    document.getElementById("length-result").innerHTML =
+      ggbApplet.getValueString("l").substring(1, ggbApplet.getValueString("l").length);
   } else {
-    window.alert("Bitte zu erst die Punkten P1, P2 zeichnen lassen")
+    window.alert(`Bitte zu erst den Vektoren V zeichnen lassen`);
   }
-
 }
 
-function updateLine(obj) {
+function okayToCalculateLengthOfVecor() {
+  return ggbApplet.getVisible('V');
+}
 
-  if (ggbApplet.getObjectType(obj) == "point") {
+
+function updateVector(obj) {
+
+  if (ggbApplet.getObjectType(obj) === "vector") {
     ggbApplet.deleteObject('text1');
-    calculateLength();
+    calculateLengthOfVector();
   }
 }
+
 
 function clearInputs() {
 
   for (let i = 1; i <= 2; i++) {
-    document.getElementById(`P${i}-x`).value = '';
-    document.getElementById(`P${i}-y`).value = '';
-    document.getElementById(`P${i}-z`).value = '';
+    document.getElementById(`V${i}-x`).value = '';
+    document.getElementById(`V${i}-y`).value = '';
+    document.getElementById(`V${i}-z`).value = '';
   }
-  document.getElementById(`length-between-points`).innerHTML = '...';
+  document.getElementById(`angel-result`).innerHTML = '';
+
   // enableButtons();
-}
-
-function okayToDrawPoint(pointId) {
-  return document.getElementById(`P${pointId}-x`).value !== '' &&
-    document.getElementById(`P${pointId}-y`).value !== '' &&
-    document.getElementById(`P${pointId}-z`).value !== '';
-}
-
-function okayToDrawLine() {
-  return ggbApplet.getVisible('P_1') && ggbApplet.getVisible('P_2');
 }
 
 function disableButtons() {
@@ -92,23 +105,6 @@ function enableButtons() {
   document.getElementById("drawEBtn").disabled = false;
   document.getElementById("drawGBtn").disabled = false;
   document.getElementById("intersectionBtn").disabled = false;
-}
-
-function getCoordinate(baseString, coordinateLetter) {
-
-  if (coordinateLetter && baseString) {
-    let splitString = baseString.split(',')
-    switch (coordinateLetter) {
-      case 'x':
-        return splitString[0]
-      case 'y':
-        return splitString[1]
-      case 'z':
-        return splitString[2]
-      default:
-        return '0'
-    }
-  }
 }
 
 function randomInRange(min, max) {
@@ -153,10 +149,12 @@ function registerGbApplet() {
 
 }
 
-function init(informativeApplet) {
-  ggbApp = initGgApplet(informativeApplet);
+function init(informative) {
+  ggbApp = initGgApplet(informative);
   registerGbApplet();
 }
+
+
 
 
 

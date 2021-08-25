@@ -13,7 +13,7 @@ export const ScriptStore: Scripts[] = [
   {name: 'geogebra-applet-parallel-line', src: '../assets/js/lines-scripts/parallel-line.js'},
   {name: 'geogebra-applet-intersection-of-two-lines', src: '../assets/js/lines-scripts/intersection-of-two-lines.js'},
 
-  {name: 'geogebra-applet-length-of-vector', src: '../assets/js/lines-scripts/length-of-vector.js'},
+  {name: 'geogebra-applet-length-of-vector', src: '../assets/js/vectors-scripts/length-of-vector.js'},
   {name: 'geogebra-applet-angle-between-two-vectors', src: '../assets/js/vectors-scripts/angel-between-two-vectors.js'},
   {name: 'arithmatic-operations-vectors', src: '../assets/js/vectors-scripts/arithmatic-operations-vectors.js'},
 

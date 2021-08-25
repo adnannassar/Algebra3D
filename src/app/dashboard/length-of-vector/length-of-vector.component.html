@@ -6,34 +6,22 @@
           <div class="bg-white main-img-radius-top main-img-radius-bottom">
             <div class="card-body">
               <div class="d-flex border-bottom py-4  justify-content-center">
-                <div class="content" [innerHTML]="pointForm1">...</div>
-                <div class="content" [innerHTML]="pointForm2">...</div>
+                <div class="content mx-3" [innerHTML]="vectorInputForm">...</div>
               </div>
               <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
                 <button id="fillEBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInPoint(1);">P1 mit
+                        onclick="fillTestValuesInVector();">V mit
                   Random Werte füllen
                 </button>
-                <button id="fillGBtn" class="btn btn-outline-primary m-2 flex-grow-1"
-                        onclick="fillTestValuesInPoint(2);">P2 mit
-                  Random Werte füllen
-                </button>
-                <button id="drawP1Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPoint(1);">P1
-                  zeichnen
-                </button>
-                <button id="draw21Btn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawPoint(2);">P2
+                <button id="drawEBtn" class="btn btn-outline-primary m-2 flex-grow-1" onclick="drawVector();">V
                   zeichnen
                 </button>
                 <button id="intersectionBtn" class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="calculateLength()">Länge berechnen
+                        onclick="calculateLengthOfVector()">Länge berechnen
                 </button>
                 <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
               </div>
-              <h2 class="result text-center pt-3">Die Länge eines Vektors</h2>
-              <div class="d-flex border-bottom py-4  justify-content-center">
-                <h2 class="result text-center">|P<sub>1</sub> P<sub>2</sub>| = <span
-                  id="length-between-points">...</span></h2>
-              </div>
+              <h2 class="result text-center pt-3">Die Länge des Vektors: <span id="length-result"></span></h2>
               <div class="d-flex py-4 align-items-center justify-content-center">
                 <div id="ggb-element"></div>
               </div>
@@ -44,6 +32,7 @@
     </div>
   </div>
 </div>
+
 
 
 

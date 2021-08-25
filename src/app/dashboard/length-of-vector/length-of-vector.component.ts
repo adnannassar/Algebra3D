@@ -10,8 +10,7 @@ import {ScriptService} from "../../services/script.service";
 })
 export class LengthOfVectorComponent implements OnInit {
 
-  pointForm1: SafeHtml = '';
-  pointForm2: SafeHtml = '';
+  vectorInputForm: SafeHtml = '';
 
 
   constructor(private _renderer2: Renderer2,
@@ -45,24 +44,17 @@ export class LengthOfVectorComponent implements OnInit {
 
   async loadHtml() {
     this.loadPoint1Form();
-    this.loadPoint2Form();
 
   }
 
 
   loadPoint1Form() {
-    fetch('/assets/math-templates/length-of-vector/point1-input-form.html').then(res => res.text()).then(data => {
+    fetch('/assets/math-templates/length-of-vector/vector-input-form.html').then(res => res.text()).then(data => {
       console.log('HTML loaded');
-      this.pointForm1 = this.sanitizer.bypassSecurityTrustHtml(data);
+      this.vectorInputForm = this.sanitizer.bypassSecurityTrustHtml(data);
     });
   }
 
-  loadPoint2Form() {
-    fetch('/assets/math-templates/length-of-vector/point2-input-form.html').then(res => res.text()).then(data => {
-      console.log('HTML loaded');
-      this.pointForm2 = this.sanitizer.bypassSecurityTrustHtml(data);
-    });
-  }
 
 
 }
