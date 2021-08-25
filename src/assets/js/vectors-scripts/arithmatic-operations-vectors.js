@@ -3,14 +3,9 @@ init(false);
 
 
 let
-  V1_BaseVector_x, V1_BaseVector_y, V1_BaseVector_z,
-  V1_DirectionVector_x, V1_DirectionVector_y, V1_DirectionVector_z,
-
-  V2_BaseVector_x, V2_BaseVector_y, V2_BaseVector_z,
-  V2_DirectionVector_x, V2_DirectionVector_y, V2_DirectionVector_z,
-
-  V_out_BaseVector_x, V_out_BaseVector_y, V_out_BaseVector_z,
-  V_out_DirectionVector_x, V_out_DirectionVector_y, V_out_DirectionVector_z;
+  V1_x, V1_y, V1_z,
+  V2_x, V2_y, V2_z,
+  V_out_x, V_out_y, V_out_z;
 
 
 function reset() {
@@ -20,49 +15,42 @@ function reset() {
 
 function getVectorValues(vectorId) {
   if (vectorId === 1) {
-    V1_BaseVector_x = document.getElementById(`V${vectorId}-base-vector-x`).value;
-    V1_BaseVector_y = document.getElementById(`V${vectorId}-base-vector-y`).value;
-    V1_BaseVector_z = document.getElementById(`V${vectorId}-base-vector-z`).value;
-    V1_DirectionVector_x = document.getElementById(`V${vectorId}-direction-vector-x`).value;
-    V1_DirectionVector_y = document.getElementById(`V${vectorId}-direction-vector-y`).value;
-    V1_DirectionVector_z = document.getElementById(`V${vectorId}-direction-vector-z`).value;
+    V1_x = document.getElementById(`V${vectorId}-x`).value;
+    V1_y = document.getElementById(`V${vectorId}-y`).value;
+    V1_z = document.getElementById(`V${vectorId}-z`).value;
   } else {
-    V2_BaseVector_x = document.getElementById(`V${vectorId}-base-vector-x`).value;
-    V2_BaseVector_y = document.getElementById(`V${vectorId}-base-vector-y`).value;
-    V2_BaseVector_z = document.getElementById(`V${vectorId}-base-vector-z`).value;
-    V2_DirectionVector_x = document.getElementById(`V${vectorId}-direction-vector-x`).value;
-    V2_DirectionVector_y = document.getElementById(`V${vectorId}-direction-vector-y`).value;
-    V2_DirectionVector_z = document.getElementById(`V${vectorId}-direction-vector-z`).value;
+    V2_x = document.getElementById(`V${vectorId}-x`).value;
+    V2_y = document.getElementById(`V${vectorId}-y`).value;
+    V2_z = document.getElementById(`V${vectorId}-z`).value;
   }
 
 }
 
 function fillTestValuesInVector(lineId) {
-  document.getElementById(`V${lineId}-base-vector-x`).value = randomInRange(1, 5);
-  document.getElementById(`V${lineId}-base-vector-y`).value = randomInRange(1, 5);
-  document.getElementById(`V${lineId}-base-vector-z`).value = randomInRange(1, 5);
-  document.getElementById(`V${lineId}-direction-vector-x`).value = randomInRange(1, 5);
-  document.getElementById(`V${lineId}-direction-vector-y`).value = randomInRange(1, 5);
-  document.getElementById(`V${lineId}-direction-vector-z`).value = randomInRange(1, 5);
+  document.getElementById(`V${lineId}-x`).value = randomInRange(1, 5);
+  document.getElementById(`V${lineId}-y`).value = randomInRange(1, 5);
+  document.getElementById(`V${lineId}-z`).value = randomInRange(1, 5);
 }
 
 function drawVector(vectorId) {
   getVectorValues(vectorId);
   if (okayToDrawVector(vectorId)) {
     if (vectorId === 1) {
-      ggbApplet.evalCommand(`A_${vectorId}= (${V1_BaseVector_x} , ${V1_BaseVector_y} ,${V1_BaseVector_z})`);
+      ggbApplet.evalCommand(`A_${vectorId}= (0,0,0)`);
       ggbApplet.setFixed(`A_${vectorId}`, false, false);
+      ggbApplet.setVisible(`A_${vectorId}`, false);
 
-      ggbApplet.evalCommand(`B_${vectorId}= (${V1_DirectionVector_x} , ${V1_DirectionVector_y} ,${V1_DirectionVector_z})`);
+      ggbApplet.evalCommand(`B_${vectorId}=(${V1_x} , ${V1_y} ,${V1_z})`);
       ggbApplet.setFixed(`B_${vectorId}`, false, false);
 
       ggbApplet.evalCommand(`V_${vectorId}= Vector(A_${vectorId},B_${vectorId})`);
 
     } else {
-      ggbApplet.evalCommand(`A_${vectorId}= (${V2_BaseVector_x} , ${V2_BaseVector_y} ,${V2_BaseVector_z})`);
+      ggbApplet.evalCommand(`A_${vectorId}=  (0,0,0)`);
       ggbApplet.setFixed(`A_${vectorId}`, false, false);
+      ggbApplet.setVisible(`A_${vectorId}`, false);
 
-      ggbApplet.evalCommand(`B_${vectorId}= (${V2_DirectionVector_x} , ${V2_DirectionVector_y} ,${V2_DirectionVector_z})`);
+      ggbApplet.evalCommand(`B_${vectorId}=(${V2_x} , ${V2_y} ,${V2_z})`);
       ggbApplet.setFixed(`B_${vectorId}`, false, false);
 
       ggbApplet.evalCommand(`V_${vectorId}= Vector(A_${vectorId},B_${vectorId})`);
@@ -77,39 +65,59 @@ function drawVector(vectorId) {
 
 
 function okayToDrawVector(vectorId) {
-  return document.getElementById(`V${vectorId}-base-vector-x`).value !== '' &&
-    document.getElementById(`V${vectorId}-base-vector-y`).value !== '' &&
-    document.getElementById(`V${vectorId}-base-vector-z`).value !== '' &&
-    document.getElementById(`V${vectorId}-direction-vector-x`).value !== '' &&
-    document.getElementById(`V${vectorId}-direction-vector-y`).value !== '' &&
-    document.getElementById(`V${vectorId}-direction-vector-z`).value !== '';
+  return document.getElementById(`V${vectorId}-x`).value !== '' &&
+    document.getElementById(`V${vectorId}-y`).value !== '' &&
+    document.getElementById(`V${vectorId}-z`).value !== '';
 }
 
-function addTwoVectors() {
+function operationOnTwoVectors(operation) {
   if (okayToDoOperation()) {
-    V_out_BaseVector_x = Number(V1_BaseVector_x) + Number(V2_BaseVector_x);
-    V_out_BaseVector_y = Number(V1_BaseVector_y) + Number(V2_BaseVector_y);
-    V_out_BaseVector_z = Number(V1_BaseVector_z) + Number(V2_BaseVector_z);
-    V_out_DirectionVector_x = Number(V1_DirectionVector_x) + Number(V2_DirectionVector_x);
-    V_out_DirectionVector_y = Number(V1_DirectionVector_y) + Number(V2_DirectionVector_y);
-    V_out_DirectionVector_z = Number(V1_DirectionVector_z) + Number(V2_DirectionVector_z);
+    switch (operation) {
+      case '+' :
+        V_out_x = Number(V1_x) + Number(V2_x);
+        V_out_y = Number(V1_y) + Number(V2_y);
+        V_out_z = Number(V1_z) + Number(V2_z);
+        break;
 
-    ggbApplet.evalCommand(`C= (${V_out_BaseVector_x} , ${V_out_BaseVector_y} ,${V_out_BaseVector_z})`);
+      case '-' :
+        V_out_x = Number(V1_x) - Number(V2_x);
+        V_out_y = Number(V1_y) - Number(V2_y);
+        V_out_z = Number(V1_z) - Number(V2_z);
+        break;
+
+
+      case '*' :
+        V_out_x = Number(V1_x) * Number(V2_x);
+        V_out_y = Number(V1_y) * Number(V2_y);
+        V_out_z = Number(V1_z) * Number(V2_z);
+        break;
+
+      case '/' :
+        V_out_x = Number(V1_x) / Number(V2_x);
+        V_out_y = Number(V1_y) / Number(V2_y);
+        V_out_z = Number(V1_z) / Number(V2_z);
+        break;
+      case 'cross':
+        V_out_x = (Number(V1_y) * Number(V2_z)) - (Number(V2_y) * Number(V1_z));
+        V_out_y = (Number(V1_z) * Number(V2_x)) - (Number(V2_z) * Number(V1_x));
+        V_out_z = (Number(V1_x) * Number(V2_y)) - (Number(V2_x) * Number(V1_y));
+        break;
+      default:
+        console.log("Error by operations on vectors!");
+    }
+
+    ggbApplet.evalCommand(`C = (0,0,0)`);
     ggbApplet.setFixed(`C`, false, false);
 
-    ggbApplet.evalCommand(`D= (${V_out_DirectionVector_x} , ${V_out_DirectionVector_y} ,${V_out_DirectionVector_z})`);
+    ggbApplet.evalCommand(`D = (${V_out_x} , ${V_out_y} ,${V_out_z})`);
     ggbApplet.setFixed(`D, false, false`);
 
-    ggbApplet.evalCommand(`VOutPlus = Vector(C,D)`);
-    ggbApplet.setColor('VOutPlus', 255, 0, 0);
+    ggbApplet.evalCommand(`V_out = Vector(C,D)`);
+    ggbApplet.setColor('V_out', 255, 0, 0);
 
-
-    document.getElementById("V-out-base-vector-x").value = V_out_BaseVector_x;
-    document.getElementById("V-out-base-vector-y").value = V_out_BaseVector_y;
-    document.getElementById("V-out-base-vector-z").value = V_out_BaseVector_z;
-    document.getElementById("V-out-direction-vector-x").value = V_out_DirectionVector_x;
-    document.getElementById("V-out-direction-vector-y").value = V_out_DirectionVector_y;
-    document.getElementById("V-out-direction-vector-z").value = V_out_DirectionVector_z;
+    document.getElementById("V-out-x").value = V_out_x;
+    document.getElementById("V-out-y").value = V_out_y;
+    document.getElementById("V-out-z").value = V_out_z;
 
     document.getElementById("result-container").style.display = "block";
 
@@ -119,71 +127,9 @@ function addTwoVectors() {
   }
 }
 
-function subTwoVectors() {
-  if (okayToDoOperation()) {
-
-  } else {
-    window.alert(`Bitte zu erst die Vektoren V1 und V2 zeichnen lassen`);
-  }
-}
-
-function mulTwoVectors() {
-  if (okayToDoOperation()) {
-
-  } else {
-    window.alert(`Bitte zu erst die Vektoren V1 und V2 zeichnen lassen`);
-  }
-}
-
-function divTwoVectors() {
-  if (okayToDoOperation()) {
-
-  } else {
-    window.alert(`Bitte zu erst die Vektoren V1 und V2 zeichnen lassen`);
-  }
-}
-
-function scalarProduct() {
-  if (okayToDoOperation()) {
-
-  } else {
-    window.alert(`Bitte zu erst die Vektoren V1 und V2 zeichnen lassen`);
-  }
-}
 
 function okayToDoOperation() {
   return ggbApplet.getVisible('V_1') && ggbApplet.getVisible('V_2');
-}
-
-function findIntersectionPointBetweenTwoLines() {
-  if (okayToDoOperation()) {
-    ggbApplet.evalCommand(`Schnittpunkt = Intersect(G_1,G_2)`);
-    ggbApplet.setColor('Schnittpunkt', 255, 0, 0);
-
-
-    let intersectionPointString = ggbApplet.getValueString("Schnittpunkt");
-    let intersectionPointStringEdited = intersectionPointString.substring(16, intersectionPointString.length - 1);
-    let intersectionPointStringRow = intersectionPointStringEdited.replace(/\s/g, "");
-
-    if (intersectionPointStringEdited.startsWith('?')) {
-      document.getElementById(`P1-x`).style.color = "red";
-      document.getElementById(`P1-y`).style.color = "red";
-      document.getElementById(`P1-z`).style.color = "red";
-      document.getElementById(`no-intersection`).style.display = "block";
-    } else {
-      document.getElementById(`P1-x`).style.color = "black";
-      document.getElementById(`P1-y`).style.color = "black";
-      document.getElementById(`P1-z`).style.color = "black";
-      document.getElementById(`no-intersection`).style.display = "none";
-    }
-
-    document.getElementById(`P1-x`).value = getCoordinate(intersectionPointStringRow, 'x')
-    document.getElementById(`P1-y`).value = getCoordinate(intersectionPointStringRow, 'y');
-    document.getElementById(`P1-z`).value = getCoordinate(intersectionPointStringRow, 'z');
-
-  } else {
-    window.alert(`Bitte zu erst die Geraden G1 und G2 zeichnen lassen`);
-  }
 }
 
 
@@ -198,17 +144,15 @@ function updatePoint(obj) {
 function clearInputs() {
 
   for (let i = 1; i <= 2; i++) {
-    document.getElementById(`G${i}-base-vector-x`).value = '';
-    document.getElementById(`G${i}-base-vector-y`).value = '';
-    document.getElementById(`G${i}-base-vector-z`).value = '';
-    document.getElementById(`G${i}-direction-vector-x`).value = '';
-    document.getElementById(`G${i}-direction-vector-y`).value = '';
-    document.getElementById(`G${i}-direction-vector-z`).value = '';
-    document.getElementById(`P1-x`).value = '';
-    document.getElementById(`P1-y`).value = '';
-    document.getElementById(`P1-z`).value = '';
-    document.getElementById(`no-intersection`).style.display = "none";
+    document.getElementById(`V${i}-x`).value = '';
+    document.getElementById(`V${i}-y`).value = '';
+    document.getElementById(`V${i}-z`).value = '';
   }
+  document.getElementById(`V-out-x`).value = '';
+  document.getElementById(`V-out-y`).value = '';
+  document.getElementById(`V-out-z`).value = '';
+
+  document.getElementById(`no-intersection`).style.display = "none";
 
   // enableButtons();
 }

@@ -6,10 +6,8 @@
           <div class="bg-white main-img-radius-top main-img-radius-bottom">
             <div class="card-body">
               <div class="d-flex border-bottom py-4  justify-content-center">
-                <div class="content" [innerHTML]="vectorInputForm1">...</div>
-              </div>
-              <div class="d-flex border-bottom py-4  justify-content-center">
-                <div class="content" [innerHTML]="vectorInputForm2">...</div>
+                <div class="content mx-3" [innerHTML]="vectorInputForm1">...</div>
+                <div class="content mx-3" [innerHTML]="vectorInputForm2">...</div>
               </div>
               <div class="d-flex border-bottom py-4 flex-wrap justify-content-center px-lg-5">
                 <button id="fillEBtn" class="btn btn-outline-primary m-2 flex-grow-1"
@@ -27,19 +25,19 @@
                   zeichnen
                 </button>
                 <button class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="addTwoVectors()">V1 + V2
+                        onclick="operationOnTwoVectors('+')">V1 + V2
                 </button>
                 <button class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="subTwoVectors()">V1 - V2
+                        onclick="operationOnTwoVectors('-')">V1 - V2
                 </button>
                 <button class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="mulTwoVectors()">V1 * V2
+                        onclick="operationOnTwoVectors('*')">V1 <sub>*</sub> V2
                 </button>
                 <button class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="divTwoVectors()">V1 / V2
+                        onclick="operationOnTwoVectors('/')">V1 / V2
                 </button>
                 <button class="btn btn-outline-success m-2 flex-grow-1"
-                        onclick="scalarProduct()">Skalarprodukt
+                        onclick="operationOnTwoVectors('cross')">Kreuzprodukt
                 </button>
                 <button class="btn btn-outline-danger m-2 flex-grow-1" onclick="reset();">Zurücksetzen</button>
               </div>
