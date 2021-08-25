@@ -65,4 +65,16 @@ export class DashboardComponent implements OnInit {
         window.location.reload();
       });
   }
+  navigateToLengthOfVector() {
+    this.router.navigate(['length-of-vector'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+  navigateToAngleBetweenTwoVectors() {
+    this.router.navigate(['angle-between-two-vectors'])
+      .then(() => {
+        window.location.reload();
+      });
+  }
 }

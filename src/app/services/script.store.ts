@@ -15,6 +15,8 @@ export const ScriptStore: Scripts[] = [
   {name: 'geogebra-applet-length-between-two-points', src: '../assets/js/lines-scripts/length-between-two-points.js'},
   {name: 'geogebra-applet-intersection-two-planes', src: '../assets/js/planes-scripts/intersection-two-planes.js'},
   {name: 'geogebra-applet-intersection-plane-line', src: '../assets/js/planes-scripts/intersection-plane-line.js'},
-  {name: 'geogebra-applet-parallel-plane', src: '../assets/js/planes-scripts/parallel-planes.js'}
+  {name: 'geogebra-applet-parallel-plane', src: '../assets/js/planes-scripts/parallel-planes.js'},
+  {name: 'geogebra-applet-length-of-vector', src: '../assets/js/lines-scripts/length-of-vector.js'},
+  {name: 'geogebra-applet-angle-between-two-vectors', src: '../assets/js/lines-scripts/angle-between-two-vectors.js'}
 
 ];

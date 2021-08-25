@@ -9,6 +9,8 @@ import {LengthBetweenTwoPointsComponent} from "./dashboard/length-between-two-po
 import {ParallelLineComponent} from "./dashboard/parallel-line/parallel-line.component";
 import {IntersectionOfTwoLinesComponent} from "./dashboard/intersection-of-two-lines/intersection-of-two-lines.component";
 import {ParallelPlaneComponent} from "./dashboard/parallel-plane/parallel-plane.component";
+import {AngleBetweenTwoVectorsComponent} from "./dashboard/angle-between-two-vectors/angle-between-two-vectors.component";
+import {LengthOfVectorComponent} from "./dashboard/length-of-vector/length-of-vector.component";
 
 
 const routes: Routes = [
@@ -20,7 +22,9 @@ const routes: Routes = [
   {path: 'intersection-of-two-lines', component: IntersectionOfTwoLinesComponent},
   {path: 'intersection-plane-and-line', component: IntersectionPlaneAndLineComponent},
   {path: 'intersection-planes', component: IntersectionTwoPlanesComponent},
-  {path: 'parallel-plane', component: ParallelPlaneComponent}
+  {path: 'parallel-plane', component: ParallelPlaneComponent},
+  {path: 'length-of-vector', component: LengthOfVectorComponent},
+  {path: 'angle-between-two-vectors', component: AngleBetweenTwoVectorsComponent}
 ];
 
 
