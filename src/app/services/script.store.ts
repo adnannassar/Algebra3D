@@ -22,5 +22,4 @@ export const ScriptStore: Scripts[] = [
   {name: 'geogebra-applet-intersection-plane-line', src: '../assets/js/planes-scripts/intersection-plane-line.js'},
   {name: 'geogebra-applet-parallel-plane', src: '../assets/js/planes-scripts/parallel-planes.js'}
 
-
 ];

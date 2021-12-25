@@ -18,7 +18,6 @@ export class AngleBetweenTwoVectorsComponent implements OnInit {
               @Inject(DOCUMENT) private _document: Document,
               private sanitizer: DomSanitizer,
               private scriptService: ScriptService,) {
-
   }
 
   ngOnInit(): void {

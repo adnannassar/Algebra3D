@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build-android": "npm run build && npx cap sync && npx cap open android",
-    "sync-android": "npm run build && npx cap sync "
+    "build-ios": "npm run build && npx cap sync && npx cap open ios",
+    "sync": "npm run build && npx cap sync"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "@capacitor/android": "^3.1.2",
     "@capacitor/cli": "^3.1.2",
     "@capacitor/core": "^3.1.2",
+    "@capacitor/ios": "^3.2.0",
     "bootstrap": "^5.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",

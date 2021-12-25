@@ -16,7 +16,7 @@ export class LengthOfVectorComponent implements OnInit {
   constructor(private _renderer2: Renderer2,
               @Inject(DOCUMENT) private _document: Document,
               private sanitizer: DomSanitizer,
-              private scriptService: ScriptService,) {
+              private scriptService: ScriptService) {
 
   }
 

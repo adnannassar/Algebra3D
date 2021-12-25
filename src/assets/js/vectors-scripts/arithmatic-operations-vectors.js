@@ -23,7 +23,6 @@ function getVectorValues(vectorId) {
     V2_y = document.getElementById(`V${vectorId}-y`).value;
     V2_z = document.getElementById(`V${vectorId}-z`).value;
   }
-
 }
 
 function fillTestValuesInVector(lineId) {
@@ -56,13 +55,11 @@ function drawVector(vectorId) {
       ggbApplet.evalCommand(`V_${vectorId}= Vector(A_${vectorId},B_${vectorId})`);
     }
 
-    // ggbApplet.registerUpdateListener("updatePoint");
 
   } else {
     window.alert(`Bitte zu erst alle Werte des Vektors V${vectorId} eingeben`);
   }
 }
-
 
 function okayToDrawVector(vectorId) {
   return document.getElementById(`V${vectorId}-x`).value !== '' &&
@@ -77,6 +74,22 @@ function operationOnTwoVectors(operation) {
         V_out_x = Number(V1_x) + Number(V2_x);
         V_out_y = Number(V1_y) + Number(V2_y);
         V_out_z = Number(V1_z) + Number(V2_z);
+
+        ggbApplet.evalCommand(`C = (${V1_x} , ${V1_y} ,${V1_z})`);
+        ggbApplet.setFixed(`C`, false, false);
+
+        ggbApplet.evalCommand(`D = (${V2_x} , ${V2_y} ,${V2_z})`);
+        ggbApplet.setFixed(`D, false, false`);
+
+        ggbApplet.evalCommand(`V_out = Vector(C,D)`);
+        ggbApplet.setColor('V_out', 255, 0, 0);
+
+        document.getElementById("V-out-x").value = V_out_x;
+        document.getElementById("V-out-y").value = V_out_y;
+        document.getElementById("V-out-z").value = V_out_z;
+
+        document.getElementById("result-container").style.display = "block";
+
         break;
 
       case '-' :
@@ -105,41 +118,31 @@ function operationOnTwoVectors(operation) {
       default:
         console.log("Error by operations on vectors!");
     }
+    if (operation !== '+') {
+      ggbApplet.evalCommand(`C = (0,0,0)`);
+      ggbApplet.setFixed(`C`, false, false);
 
-    ggbApplet.evalCommand(`C = (0,0,0)`);
-    ggbApplet.setFixed(`C`, false, false);
+      ggbApplet.evalCommand(`D = (${V_out_x} , ${V_out_y} ,${V_out_z})`);
+      ggbApplet.setFixed(`D, false, false`);
 
-    ggbApplet.evalCommand(`D = (${V_out_x} , ${V_out_y} ,${V_out_z})`);
-    ggbApplet.setFixed(`D, false, false`);
+      ggbApplet.evalCommand(`V_out = Vector(C,D)`);
+      ggbApplet.setColor('V_out', 255, 0, 0);
 
-    ggbApplet.evalCommand(`V_out = Vector(C,D)`);
-    ggbApplet.setColor('V_out', 255, 0, 0);
+      document.getElementById("V-out-x").value = V_out_x;
+      document.getElementById("V-out-y").value = V_out_y;
+      document.getElementById("V-out-z").value = V_out_z;
 
-    document.getElementById("V-out-x").value = V_out_x;
-    document.getElementById("V-out-y").value = V_out_y;
-    document.getElementById("V-out-z").value = V_out_z;
-
-    document.getElementById("result-container").style.display = "block";
-
+      document.getElementById("result-container").style.display = "block";
+    }
 
   } else {
     window.alert(`Bitte zu erst die Vektoren V1 und V2 zeichnen lassen`);
   }
 }
 
-
 function okayToDoOperation() {
   return ggbApplet.getVisible('V_1') && ggbApplet.getVisible('V_2');
 }
-
-
-function updatePoint(obj) {
-
-  if (ggbApplet.getObjectType(obj) === "line") {
-    findIntersectionPointBetweenTwoLines();
-  }
-}
-
 
 function clearInputs() {
 

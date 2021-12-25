@@ -42,7 +42,6 @@ function drawVector() {
   }
 }
 
-
 function okayToDrawVector() {
   return document.getElementById(`V-x`).value !== '' &&
     document.getElementById(`V-y`).value !== '' &&
@@ -70,7 +69,6 @@ function okayToCalculateLengthOfVecor() {
   return ggbApplet.getVisible('V');
 }
 
-
 function updateVector(obj) {
 
   if (ggbApplet.getObjectType(obj) === "vector") {
@@ -79,7 +77,6 @@ function updateVector(obj) {
     calculateLengthOfVector();
   }
 }
-
 
 function clearInputs() {
 
@@ -148,7 +145,6 @@ function registerGbApplet() {
   window.addEventListener("load", function () {
     ggbApp.inject("ggb-element");
   });
-
 }
 
 function init(informative) {
